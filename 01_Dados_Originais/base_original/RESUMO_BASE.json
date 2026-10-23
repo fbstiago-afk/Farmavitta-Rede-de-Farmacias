@@ -1,0 +1,35 @@
+{
+  "periodo": [
+    "2024-10-01",
+    "2026-09-30"
+  ],
+  "lojas": 4,
+  "produtos": 5000,
+  "clientes": 22000,
+  "vendas": 143399,
+  "itens_venda": 322277,
+  "estoque_mensal_linhas": 222238,
+  "receita_total": 35060712.0,
+  "cmv_total": 21252002.94,
+  "categorias": {
+    "Medicamentos": 2100,
+    "Suplementos": 850,
+    "Higiene e Beleza": 900,
+    "Baby": 550,
+    "Perfumaria": 600
+  },
+  "arquivos": {
+    "dim_fornecedores.csv": 2220,
+    "dim_clientes.csv": 973327,
+    "dim_lojas.csv": 276,
+    "ponte_produto_fornecedor.csv": 65029,
+    "f_metas_mensais.csv": 3313,
+    "f_vendas.csv": 12259101,
+    "f_estoque_mensal.csv": 8604549,
+    "f_despesas_mensais.csv": 5600,
+    "dim_calendario.csv": 24347,
+    "f_estoque_inicial.csv": 446271,
+    "dim_produtos.csv": 496710,
+    "f_itens_venda.csv": 24469076
+  }
+}

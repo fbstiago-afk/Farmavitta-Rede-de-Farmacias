@@ -1,0 +1,56 @@
+/// Orçamento sintético de compras por loja/mês.
+table fOrcamentoCompras
+	lineageTag: 8acbdd33-ce56-5464-b042-a7f5f7029a53
+
+	column ano_mes
+		dataType: string
+		isHidden
+		lineageTag: f4c92a11-d4e7-58cc-8a57-5d96cdcd8741
+		summarizeBy: none
+		sourceColumn: ano_mes
+
+		annotation SummarizationSetBy = Automatic
+
+	column data_mes
+		dataType: dateTime
+		formatString: dd/MM/yyyy
+		isHidden
+		lineageTag: 814a6c2f-8612-580a-94bd-47e3bb4daf77
+		summarizeBy: none
+		sourceColumn: data_mes
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation UnderlyingDateTimeDataType = Date
+
+	column id_loja
+		dataType: string
+		isHidden
+		lineageTag: e9d8344a-a9e6-57e5-9f18-c5dc2f3b4b37
+		summarizeBy: none
+		sourceColumn: id_loja
+
+		annotation SummarizationSetBy = Automatic
+
+	column orcamento_compras
+		dataType: double
+		isHidden
+		lineageTag: e6cb506e-06a1-5034-bb86-21d76234ed42
+		summarizeBy: none
+		sourceColumn: orcamento_compras
+
+		annotation SummarizationSetBy = Automatic
+
+	partition fOrcamentoCompras = m
+		mode: import
+		source =
+				let
+				    Fonte = fnCsv("01_Dados_Originais\base_complementar\f_orcamento_compras.csv"),
+				    Tipado = Table.TransformColumnTypes(Fonte, {{"ano_mes", type text}, {"id_loja", type text}, {"orcamento_compras", type number}}, "en-US"),
+				    DataMes = Table.AddColumn(Tipado, "data_mes", each Date.FromText([ano_mes] & "-01"), type date),
+				    Ultimo = DataMes,
+				    Final = Table.SelectColumns(Ultimo, {"ano_mes", "data_mes", "id_loja", "orcamento_compras"})
+				in
+				    Final
+
+	annotation PBI_ResultType = Table

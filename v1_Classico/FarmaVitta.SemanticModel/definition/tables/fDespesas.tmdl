@@ -1,0 +1,92 @@
+/// Despesas operacionais mensais por loja (rubricas modeladas; não inclui impostos/depreciação).
+table fDespesas
+	lineageTag: 65cdfd0b-7e05-54b6-97a2-24025ccd7dab
+
+	column ano_mes
+		dataType: string
+		isHidden
+		lineageTag: 2434e735-346d-5cfc-8d15-37a03fbf501f
+		summarizeBy: none
+		sourceColumn: ano_mes
+
+		annotation SummarizationSetBy = Automatic
+
+	column data_mes
+		dataType: dateTime
+		formatString: dd/MM/yyyy
+		isHidden
+		lineageTag: ca3fcaf1-4912-5c2c-b685-5c6d60937d45
+		summarizeBy: none
+		sourceColumn: data_mes
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation UnderlyingDateTimeDataType = Date
+
+	column id_loja
+		dataType: string
+		isHidden
+		lineageTag: 61bf205a-bbaf-5af4-b18d-8ffb8f605344
+		summarizeBy: none
+		sourceColumn: id_loja
+
+		annotation SummarizationSetBy = Automatic
+
+	column aluguel
+		dataType: double
+		isHidden
+		lineageTag: 7aec9fc8-8fb1-54e3-a35a-5793537e16bb
+		summarizeBy: none
+		sourceColumn: aluguel
+
+		annotation SummarizationSetBy = Automatic
+
+	column pessoal
+		dataType: double
+		isHidden
+		lineageTag: 56296dab-ba69-56d3-b636-3a449d5ace3f
+		summarizeBy: none
+		sourceColumn: pessoal
+
+		annotation SummarizationSetBy = Automatic
+
+	column operacionais
+		dataType: double
+		isHidden
+		lineageTag: 138ce2be-1fc2-5a38-b51f-0f0e903af022
+		summarizeBy: none
+		sourceColumn: operacionais
+
+		annotation SummarizationSetBy = Automatic
+
+	column marketing_canais
+		dataType: double
+		isHidden
+		lineageTag: c0c1fda1-8bce-529b-94b6-6f8d6bdf7ce6
+		summarizeBy: none
+		sourceColumn: marketing_canais
+
+		annotation SummarizationSetBy = Automatic
+
+	column despesa_total
+		dataType: double
+		isHidden
+		lineageTag: fd3bd3d2-509a-5040-957a-2d0b68b05acc
+		summarizeBy: none
+		sourceColumn: despesa_total
+
+		annotation SummarizationSetBy = Automatic
+
+	partition fDespesas = m
+		mode: import
+		source =
+				let
+				    Fonte = fnCsv("01_Dados_Originais\base_original\f_despesas_mensais.csv"),
+				    Tipado = Table.TransformColumnTypes(Fonte, {{"ano_mes", type text}, {"id_loja", type text}, {"aluguel", type number}, {"pessoal", type number}, {"operacionais", type number}, {"marketing_canais", type number}, {"despesa_total", type number}}, "en-US"),
+				    DataMes = Table.AddColumn(Tipado, "data_mes", each Date.FromText([ano_mes] & "-01"), type date),
+				    Ultimo = DataMes,
+				    Final = Table.SelectColumns(Ultimo, {"ano_mes", "data_mes", "id_loja", "aluguel", "pessoal", "operacionais", "marketing_canais", "despesa_total"})
+				in
+				    Final
+
+	annotation PBI_ResultType = Table

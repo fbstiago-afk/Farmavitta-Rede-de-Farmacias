@@ -1,0 +1,31 @@
+/// Canais de venda (estático, validado no GATE A).
+table dCanal
+	lineageTag: ee41c53c-7753-5999-8289-0ecd50ecf74c
+
+	column Canal
+		dataType: string
+		lineageTag: c5350053-ee1e-5174-85db-fc157e5ff115
+		summarizeBy: none
+		sourceColumn: Canal
+		sortByColumn: 'Ordem Canal'
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Ordem Canal'
+		dataType: int64
+		isHidden
+		lineageTag: 32a8e4cf-0d62-5809-8d9b-d73693292300
+		summarizeBy: none
+		sourceColumn: Ordem Canal
+
+		annotation SummarizationSetBy = Automatic
+
+	partition dCanal = m
+		mode: import
+		source =
+				let
+				    Fonte = #table(type table [Canal = text, Ordem Canal = Int64.Type], {{"Loja física", 1}, {"Aplicativo", 2}, {"Site", 3}, {"Delivery", 4}})
+				in
+				    Fonte
+
+	annotation PBI_ResultType = Table

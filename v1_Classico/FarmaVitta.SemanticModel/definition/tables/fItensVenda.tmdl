@@ -1,0 +1,140 @@
+/// Fato item de cupom. Fonte de receita/margem por produto. Canal e cliente herdados do cupom no Power Query (sem relação fato–fato).
+table fItensVenda
+	lineageTag: c54d8305-468c-5204-9175-e00a428fea5d
+
+	column id_item
+		dataType: string
+		isHidden
+		lineageTag: 8eca8771-2831-5143-8c85-c79d6db4db2c
+		summarizeBy: none
+		sourceColumn: id_item
+
+		annotation SummarizationSetBy = Automatic
+
+	column id_venda
+		dataType: string
+		isHidden
+		lineageTag: b6a73a43-85e0-503a-9dcb-af01aac10929
+		summarizeBy: none
+		sourceColumn: id_venda
+
+		annotation SummarizationSetBy = Automatic
+
+	column id_loja
+		dataType: string
+		isHidden
+		lineageTag: ddbc9615-c308-5215-b66c-6cb98c79ca6c
+		summarizeBy: none
+		sourceColumn: id_loja
+
+		annotation SummarizationSetBy = Automatic
+
+	column id_produto
+		dataType: string
+		isHidden
+		lineageTag: eb87453a-cf83-54a6-8b17-2cb2215e008d
+		summarizeBy: none
+		sourceColumn: id_produto
+
+		annotation SummarizationSetBy = Automatic
+
+	column data_venda
+		dataType: dateTime
+		formatString: dd/MM/yyyy
+		isHidden
+		lineageTag: 6ceac7f9-8f1e-59e7-a0ae-3ddec3304002
+		summarizeBy: none
+		sourceColumn: data_venda
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation UnderlyingDateTimeDataType = Date
+
+	column quantidade
+		dataType: int64
+		isHidden
+		lineageTag: 6988151e-91e7-5acc-ab25-1511d79c5d88
+		summarizeBy: none
+		sourceColumn: quantidade
+
+		annotation SummarizationSetBy = Automatic
+
+	column preco_unitario_bruto
+		dataType: double
+		isHidden
+		lineageTag: 4bc8452a-1263-5978-b688-8653b08f0f29
+		summarizeBy: none
+		sourceColumn: preco_unitario_bruto
+
+		annotation SummarizationSetBy = Automatic
+
+	column taxa_desconto
+		dataType: double
+		isHidden
+		lineageTag: 696f5f33-a250-5fae-8622-706b66c875a5
+		summarizeBy: none
+		sourceColumn: taxa_desconto
+
+		annotation SummarizationSetBy = Automatic
+
+	column valor_desconto
+		dataType: double
+		isHidden
+		lineageTag: 16e1eb66-6f85-52be-95e2-054f6a5db47b
+		summarizeBy: none
+		sourceColumn: valor_desconto
+
+		annotation SummarizationSetBy = Automatic
+
+	column valor_liquido
+		dataType: double
+		isHidden
+		lineageTag: e439ff07-125d-5b5e-8d67-b622e59541f4
+		summarizeBy: none
+		sourceColumn: valor_liquido
+
+		annotation SummarizationSetBy = Automatic
+
+	column custo_total
+		dataType: double
+		isHidden
+		lineageTag: 3f9ddeba-a241-56bb-8f15-e0a4dd40c20d
+		summarizeBy: none
+		sourceColumn: custo_total
+
+		annotation SummarizationSetBy = Automatic
+
+	column canal
+		dataType: string
+		isHidden
+		lineageTag: fd257363-881f-5eef-bd00-fd38c881923a
+		summarizeBy: none
+		sourceColumn: canal
+
+		annotation SummarizationSetBy = Automatic
+
+	column id_cliente
+		dataType: string
+		isHidden
+		lineageTag: 4fa7f7bd-d9f2-5a0e-ae91-fc8af5e4953f
+		summarizeBy: none
+		sourceColumn: id_cliente
+
+		annotation SummarizationSetBy = Automatic
+
+	partition fItensVenda = m
+		mode: import
+		source =
+				let
+				    Fonte = fnCsv("01_Dados_Originais\base_original\f_itens_venda.csv"),
+				    Tipado = Table.TransformColumnTypes(Fonte, {{"id_item", type text}, {"id_venda", type text}, {"id_loja", type text}, {"id_produto", type text}, {"data_venda", type date}, {"quantidade", Int64.Type}, {"preco_unitario_bruto", type number}, {"taxa_desconto", type number}, {"valor_desconto", type number}, {"valor_liquido", type number}, {"custo_total", type number}}, "en-US"),
+				    Cupom = Table.Buffer(Table.SelectColumns(fnCsv("01_Dados_Originais\base_original\f_vendas.csv"), {"id_venda", "canal", "id_cliente"})),
+				    J = Table.NestedJoin(Tipado, "id_venda", Cupom, "id_venda", "v", JoinKind.LeftOuter),
+				    E = Table.ExpandTableColumn(J, "v", {"canal", "id_cliente"}),
+				    Anon = Table.ReplaceValue(E, "", "NI", Replacer.ReplaceValue, {"id_cliente"}),
+				    Ultimo = Anon,
+				    Final = Table.SelectColumns(Ultimo, {"id_item", "id_venda", "id_loja", "id_produto", "data_venda", "quantidade", "preco_unitario_bruto", "taxa_desconto", "valor_desconto", "valor_liquido", "custo_total", "canal", "id_cliente"})
+				in
+				    Final
+
+	annotation PBI_ResultType = Table

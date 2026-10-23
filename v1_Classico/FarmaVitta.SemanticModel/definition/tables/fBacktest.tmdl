@@ -1,0 +1,104 @@
+/// Backtest rolling-origin (h=1..3) dos métodos de previsão.
+table fBacktest
+	lineageTag: 8cc4f0c1-6ea0-55c5-af43-6bf77f3a4eab
+
+	column origem
+		dataType: string
+		isHidden
+		lineageTag: 7eae5fc3-f1cb-5c7f-adc1-53efe8efc3b8
+		summarizeBy: none
+		sourceColumn: origem
+
+		annotation SummarizationSetBy = Automatic
+
+	column ano_mes_alvo
+		dataType: string
+		isHidden
+		lineageTag: 9c697a72-f98a-5dfe-affc-224e76aa7745
+		summarizeBy: none
+		sourceColumn: ano_mes_alvo
+
+		annotation SummarizationSetBy = Automatic
+
+	column Horizonte
+		dataType: int64
+		lineageTag: 7fbbdc30-ff5a-5f53-93b4-74ab58c7df0b
+		summarizeBy: none
+		sourceColumn: horizonte
+
+		annotation SummarizationSetBy = Automatic
+
+	column id_loja
+		dataType: string
+		isHidden
+		lineageTag: 342a15a1-8e14-5537-9260-24f7f7d837c4
+		summarizeBy: none
+		sourceColumn: id_loja
+
+		annotation SummarizationSetBy = Automatic
+
+	column Metodo
+		dataType: string
+		lineageTag: 9f6668cd-0636-5199-9d9f-3413fb537d87
+		summarizeBy: none
+		sourceColumn: metodo
+
+		annotation SummarizationSetBy = Automatic
+
+	column real
+		dataType: double
+		isHidden
+		lineageTag: ccf2f958-596e-5a95-9b89-6ae73d74f5fe
+		summarizeBy: none
+		sourceColumn: real
+
+		annotation SummarizationSetBy = Automatic
+
+	column previsto
+		dataType: double
+		isHidden
+		lineageTag: 4e91c408-4d14-5418-ac32-756384c823c8
+		summarizeBy: none
+		sourceColumn: previsto
+
+		annotation SummarizationSetBy = Automatic
+
+	column erro_abs
+		dataType: double
+		isHidden
+		lineageTag: 2d7ad562-de58-52de-a0f8-866e737805fb
+		summarizeBy: none
+		sourceColumn: erro_abs
+
+		annotation SummarizationSetBy = Automatic
+
+	column erro_pct
+		dataType: double
+		isHidden
+		lineageTag: f169bd04-5865-59a5-b891-8a1ae765b8cd
+		summarizeBy: none
+		sourceColumn: erro_pct
+
+		annotation SummarizationSetBy = Automatic
+
+	column metodo_selecionado
+		dataType: int64
+		isHidden
+		lineageTag: 88fb08e3-899a-53c8-9011-2ed6ecf1bc7c
+		summarizeBy: none
+		sourceColumn: metodo_selecionado
+
+		annotation SummarizationSetBy = Automatic
+
+	partition fBacktest = m
+		mode: import
+		source =
+				let
+				    Fonte = fnCsv("02_Dados_Tratados\f_forecast_backtest.csv"),
+				    Tipado = Table.TransformColumnTypes(Fonte, {{"origem", type text}, {"ano_mes_alvo", type text}, {"horizonte", Int64.Type}, {"id_loja", type text}, {"metodo", type text}, {"real", type number}, {"previsto", type number}, {"erro_abs", type number}, {"erro_pct", type number}, {"metodo_selecionado", Int64.Type}}, "en-US"),
+				    Ultimo = Tipado,
+				    Final = Table.SelectColumns(Ultimo, {"origem", "ano_mes_alvo", "horizonte", "id_loja", "metodo", "real", "previsto", "erro_abs", "erro_pct", "metodo_selecionado"})
+				in
+				    Final
+
+	annotation PBI_ResultType = Table

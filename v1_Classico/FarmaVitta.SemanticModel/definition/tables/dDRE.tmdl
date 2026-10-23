@@ -1,0 +1,42 @@
+/// Linhas da DRE gerencial simplificada (desconectada).
+table dDRE
+	lineageTag: c89e333b-95f1-5f65-b78d-cc7f3d6ba5f0
+
+	column 'Ordem DRE'
+		dataType: int64
+		isHidden
+		lineageTag: f9217d80-8918-5053-a944-a51bd01459ac
+		summarizeBy: none
+		sourceColumn: Ordem DRE
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Linha DRE'
+		dataType: string
+		lineageTag: 23965df6-bcaa-57a8-a76f-440eddb3cc41
+		summarizeBy: none
+		sourceColumn: Linha DRE
+		sortByColumn: 'Ordem DRE'
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Tipo Linha'
+		dataType: string
+		lineageTag: 6675c3b2-6ba6-5901-a305-e56d7cebecd0
+		summarizeBy: none
+		sourceColumn: Tipo Linha
+
+		annotation SummarizationSetBy = Automatic
+
+	partition dDRE = m
+		mode: import
+		source =
+				let
+				    Fonte = #table(type table [Ordem DRE = Int64.Type, Linha DRE = text, Tipo Linha = text], {
+				        {1, "Receita bruta", "Item"}, {2, "(−) Descontos", "Item"}, {3, "Receita líquida", "Subtotal"},
+				        {4, "(−) CMV", "Item"}, {5, "Lucro bruto", "Subtotal"}, {6, "(−) Pessoal", "Item"}, {7, "(−) Aluguel", "Item"},
+				        {8, "(−) Operacionais", "Item"}, {9, "(−) Marketing e canais", "Item"}, {10, "Resultado operacional simplificado", "Total"}})
+				in
+				    Fonte
+
+	annotation PBI_ResultType = Table

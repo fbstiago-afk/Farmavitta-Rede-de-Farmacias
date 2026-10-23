@@ -1,0 +1,579 @@
+{
+  "perfil": [
+    {
+      "tabela": "dim_calendario",
+      "linhas": 730,
+      "colunas": 7,
+      "nulos": {}
+    },
+    {
+      "tabela": "dim_clientes",
+      "linhas": 22000,
+      "colunas": 5,
+      "nulos": {}
+    },
+    {
+      "tabela": "dim_fornecedores",
+      "linhas": 60,
+      "colunas": 4,
+      "nulos": {}
+    },
+    {
+      "tabela": "dim_lojas",
+      "linhas": 4,
+      "colunas": 6,
+      "nulos": {}
+    },
+    {
+      "tabela": "dim_produtos",
+      "linhas": 5000,
+      "colunas": 11,
+      "nulos": {}
+    },
+    {
+      "tabela": "f_despesas_mensais",
+      "linhas": 96,
+      "colunas": 7,
+      "nulos": {}
+    },
+    {
+      "tabela": "f_estoque_inicial",
+      "linhas": 16562,
+      "colunas": 4,
+      "nulos": {}
+    },
+    {
+      "tabela": "f_estoque_mensal",
+      "linhas": 222238,
+      "colunas": 9,
+      "nulos": {}
+    },
+    {
+      "tabela": "f_itens_venda",
+      "linhas": 322277,
+      "colunas": 11,
+      "nulos": {}
+    },
+    {
+      "tabela": "f_metas_mensais",
+      "linhas": 96,
+      "colunas": 4,
+      "nulos": {}
+    },
+    {
+      "tabela": "f_vendas",
+      "linhas": 143399,
+      "colunas": 11,
+      "nulos": {
+        "id_cliente": 24543
+      }
+    },
+    {
+      "tabela": "ponte_produto_fornecedor",
+      "linhas": 5000,
+      "colunas": 2,
+      "nulos": {}
+    },
+    {
+      "tabela": "d_cenarios_previsao",
+      "linhas": 3,
+      "colunas": 5,
+      "nulos": {}
+    },
+    {
+      "tabela": "f_compras_mensais",
+      "linhas": 96,
+      "colunas": 4,
+      "nulos": {}
+    },
+    {
+      "tabela": "f_lotes_estoque_foto",
+      "linhas": 33114,
+      "colunas": 9,
+      "nulos": {}
+    },
+    {
+      "tabela": "f_orcamento_compras",
+      "linhas": 96,
+      "colunas": 6,
+      "nulos": {}
+    },
+    {
+      "tabela": "f_recebimentos_compras",
+      "linhas": 14547,
+      "colunas": 13,
+      "nulos": {}
+    },
+    {
+      "tabela": "f_resultado_gerencial_mensal",
+      "linhas": 96,
+      "colunas": 8,
+      "nulos": {}
+    }
+  ],
+  "testes": [
+    {
+      "area": "Chaves",
+      "teste": "dim_calendario único por data",
+      "resultado": "PASS",
+      "severidade": "-",
+      "detalhe": "0 duplicados"
+    },
+    {
+      "area": "Chaves",
+      "teste": "dim_clientes único por id_cliente",
+      "resultado": "PASS",
+      "severidade": "-",
+      "detalhe": "0 duplicados"
+    },
+    {
+      "area": "Chaves",
+      "teste": "dim_fornecedores único por id_fornecedor",
+      "resultado": "PASS",
+      "severidade": "-",
+      "detalhe": "0 duplicados"
+    },
+    {
+      "area": "Chaves",
+      "teste": "dim_lojas único por id_loja",
+      "resultado": "PASS",
+      "severidade": "-",
+      "detalhe": "0 duplicados"
+    },
+    {
+      "area": "Chaves",
+      "teste": "dim_produtos único por id_produto",
+      "resultado": "PASS",
+      "severidade": "-",
+      "detalhe": "0 duplicados"
+    },
+    {
+      "area": "Chaves",
+      "teste": "f_vendas único por id_venda",
+      "resultado": "PASS",
+      "severidade": "-",
+      "detalhe": "0 duplicados"
+    },
+    {
+      "area": "Chaves",
+      "teste": "f_itens_venda único por id_item",
+      "resultado": "PASS",
+      "severidade": "-",
+      "detalhe": "0 duplicados"
+    },
+    {
+      "area": "Chaves",
+      "teste": "f_estoque_inicial único por id_loja+id_produto",
+      "resultado": "PASS",
+      "severidade": "-",
+      "detalhe": "0 duplicados"
+    },
+    {
+      "area": "Chaves",
+      "teste": "f_estoque_mensal único por ano_mes+id_loja+id_produto",
+      "resultado": "PASS",
+      "severidade": "-",
+      "detalhe": "0 duplicados"
+    },
+    {
+      "area": "Chaves",
+      "teste": "f_metas_mensais único por ano_mes+id_loja",
+      "resultado": "PASS",
+      "severidade": "-",
+      "detalhe": "0 duplicados"
+    },
+    {
+      "area": "Chaves",
+      "teste": "f_despesas_mensais único por ano_mes+id_loja",
+      "resultado": "PASS",
+      "severidade": "-",
+      "detalhe": "0 duplicados"
+    },
+    {
+      "area": "Chaves",
+      "teste": "ponte_produto_fornecedor único por id_produto",
+      "resultado": "PASS",
+      "severidade": "-",
+      "detalhe": "0 duplicados"
+    },
+    {
+      "area": "Chaves",
+      "teste": "f_recebimentos_compras único por id_recebimento",
+      "resultado": "PASS",
+      "severidade": "-",
+      "detalhe": "0 duplicados"
+    },
+    {
+      "area": "Chaves",
+      "teste": "f_lotes_estoque_foto único por id_lote",
+      "resultado": "PASS",
+      "severidade": "-",
+      "detalhe": "0 duplicados"
+    },
+    {
+      "area": "Integridade",
+      "teste": "f_vendas.id_loja → dim_lojas",
+      "resultado": "PASS",
+      "severidade": "-",
+      "detalhe": "0 chaves órfãs"
+    },
+    {
+      "area": "Integridade",
+      "teste": "f_itens_venda.id_loja → dim_lojas",
+      "resultado": "PASS",
+      "severidade": "-",
+      "detalhe": "0 chaves órfãs"
+    },
+    {
+      "area": "Integridade",
+      "teste": "f_estoque_inicial.id_loja → dim_lojas",
+      "resultado": "PASS",
+      "severidade": "-",
+      "detalhe": "0 chaves órfãs"
+    },
+    {
+      "area": "Integridade",
+      "teste": "f_estoque_mensal.id_loja → dim_lojas",
+      "resultado": "PASS",
+      "severidade": "-",
+      "detalhe": "0 chaves órfãs"
+    },
+    {
+      "area": "Integridade",
+      "teste": "f_metas_mensais.id_loja → dim_lojas",
+      "resultado": "PASS",
+      "severidade": "-",
+      "detalhe": "0 chaves órfãs"
+    },
+    {
+      "area": "Integridade",
+      "teste": "f_despesas_mensais.id_loja → dim_lojas",
+      "resultado": "PASS",
+      "severidade": "-",
+      "detalhe": "0 chaves órfãs"
+    },
+    {
+      "area": "Integridade",
+      "teste": "f_itens_venda.id_produto → dim_produtos",
+      "resultado": "PASS",
+      "severidade": "-",
+      "detalhe": "0 chaves órfãs"
+    },
+    {
+      "area": "Integridade",
+      "teste": "f_estoque_inicial.id_produto → dim_produtos",
+      "resultado": "PASS",
+      "severidade": "-",
+      "detalhe": "0 chaves órfãs"
+    },
+    {
+      "area": "Integridade",
+      "teste": "f_estoque_mensal.id_produto → dim_produtos",
+      "resultado": "PASS",
+      "severidade": "-",
+      "detalhe": "0 chaves órfãs"
+    },
+    {
+      "area": "Integridade",
+      "teste": "ponte_produto_fornecedor.id_produto → dim_produtos",
+      "resultado": "PASS",
+      "severidade": "-",
+      "detalhe": "0 chaves órfãs"
+    },
+    {
+      "area": "Integridade",
+      "teste": "f_vendas.id_cliente → dim_clientes (anônimos excluídos)",
+      "resultado": "PASS",
+      "severidade": "-",
+      "detalhe": "0 chaves órfãs"
+    },
+    {
+      "area": "Integridade",
+      "teste": "ponte.id_fornecedor → dim_fornecedores",
+      "resultado": "PASS",
+      "severidade": "-",
+      "detalhe": "0 chaves órfãs"
+    },
+    {
+      "area": "Integridade",
+      "teste": "f_itens_venda.id_venda → f_vendas",
+      "resultado": "PASS",
+      "severidade": "-",
+      "detalhe": "0 chaves órfãs"
+    },
+    {
+      "area": "Integridade",
+      "teste": "f_recebimentos_compras.id_loja → dim_lojas",
+      "resultado": "PASS",
+      "severidade": "-",
+      "detalhe": "0 chaves órfãs"
+    },
+    {
+      "area": "Integridade",
+      "teste": "f_recebimentos_compras.id_produto → dim_produtos",
+      "resultado": "PASS",
+      "severidade": "-",
+      "detalhe": "0 chaves órfãs"
+    },
+    {
+      "area": "Integridade",
+      "teste": "f_lotes_estoque_foto.id_loja → dim_lojas",
+      "resultado": "PASS",
+      "severidade": "-",
+      "detalhe": "0 chaves órfãs"
+    },
+    {
+      "area": "Integridade",
+      "teste": "f_lotes_estoque_foto.id_produto → dim_produtos",
+      "resultado": "PASS",
+      "severidade": "-",
+      "detalhe": "0 chaves órfãs"
+    },
+    {
+      "area": "Integridade",
+      "teste": "f_recebimentos.id_fornecedor → dim_fornecedores",
+      "resultado": "PASS",
+      "severidade": "-",
+      "detalhe": "0 chaves órfãs"
+    },
+    {
+      "area": "Integridade",
+      "teste": "Recebimentos respeitam ponte_produto_fornecedor",
+      "resultado": "PASS",
+      "severidade": "-",
+      "detalhe": "0 linhas com fornecedor diferente da ponte"
+    },
+    {
+      "area": "Modelo",
+      "teste": "Ponte: 1 fornecedor por SKU (permite levar fornecedor para dProduto)",
+      "resultado": "PASS",
+      "severidade": "-",
+      "detalhe": ""
+    },
+    {
+      "area": "Escopo",
+      "teste": "4 lojas",
+      "resultado": "PASS",
+      "severidade": "-",
+      "detalhe": "4"
+    },
+    {
+      "area": "Escopo",
+      "teste": "5.000 SKUs",
+      "resultado": "PASS",
+      "severidade": "-",
+      "detalhe": "5000"
+    },
+    {
+      "area": "Escopo",
+      "teste": "Distribuição de categorias",
+      "resultado": "PASS",
+      "severidade": "-",
+      "detalhe": "{'Medicamentos': 2100, 'Higiene e Beleza': 900, 'Suplementos': 850, 'Perfumaria': 600, 'Baby': 550}"
+    },
+    {
+      "area": "Escopo",
+      "teste": "143.399 vendas / 322.277 itens",
+      "resultado": "PASS",
+      "severidade": "-",
+      "detalhe": "143399 / 322277"
+    },
+    {
+      "area": "Escopo",
+      "teste": "Período de vendas 2024-10-01 a 2026-09-30",
+      "resultado": "PASS",
+      "severidade": "-",
+      "detalhe": "2024-10-01 a 2026-09-30"
+    },
+    {
+      "area": "Escopo",
+      "teste": "Calendário 730 dias contínuos",
+      "resultado": "PASS",
+      "severidade": "-",
+      "detalhe": ""
+    },
+    {
+      "area": "Escopo",
+      "teste": "f_metas_mensais completo (24 meses × 4 lojas)",
+      "resultado": "PASS",
+      "severidade": "-",
+      "detalhe": "96"
+    },
+    {
+      "area": "Escopo",
+      "teste": "f_despesas_mensais completo (24 meses × 4 lojas)",
+      "resultado": "PASS",
+      "severidade": "-",
+      "detalhe": "96"
+    },
+    {
+      "area": "Monetário",
+      "teste": "Receita líquida = R$ 35.060.712,00 (RESUMO_BASE)",
+      "resultado": "PASS",
+      "severidade": "-",
+      "detalhe": "35,060,712.00"
+    },
+    {
+      "area": "Monetário",
+      "teste": "CMV = R$ 21.252.002,94 (RESUMO_BASE)",
+      "resultado": "PASS",
+      "severidade": "-",
+      "detalhe": "21,252,002.94"
+    },
+    {
+      "area": "Monetário",
+      "teste": "Cupom: bruto − desconto = líquido (±0,01)",
+      "resultado": "PASS",
+      "severidade": "-",
+      "detalhe": "0 cupons fora"
+    },
+    {
+      "area": "Monetário",
+      "teste": "Sem valores negativos em vendas",
+      "resultado": "PASS",
+      "severidade": "-",
+      "detalhe": "0"
+    },
+    {
+      "area": "Reconciliação",
+      "teste": "Cabeçalho × itens: líquido (±0,05 por cupom)",
+      "resultado": "PASS",
+      "severidade": "-",
+      "detalhe": "0 cupons fora; dif. total -0.00"
+    },
+    {
+      "area": "Reconciliação",
+      "teste": "Cabeçalho × itens: custo (±0,05 por cupom)",
+      "resultado": "PASS",
+      "severidade": "-",
+      "detalhe": "0 cupons fora; dif. total 0.00"
+    },
+    {
+      "area": "Reconciliação",
+      "teste": "Cabeçalho × itens: desconto (±0,05 por cupom)",
+      "resultado": "PASS",
+      "severidade": "-",
+      "detalhe": "0 cupons fora; dif. total 0.00"
+    },
+    {
+      "area": "Reconciliação",
+      "teste": "qtd_itens_distintos = SKUs distintos nos itens",
+      "resultado": "PASS",
+      "severidade": "-",
+      "detalhe": "0 cupons"
+    },
+    {
+      "area": "Reconciliação",
+      "teste": "Itens: id_loja e data iguais ao cabeçalho",
+      "resultado": "PASS",
+      "severidade": "-",
+      "detalhe": ""
+    },
+    {
+      "area": "Clientes",
+      "teste": "Proporção de cupons anônimos documentada",
+      "resultado": "PASS",
+      "severidade": "-",
+      "detalhe": "17.1% anônimos"
+    },
+    {
+      "area": "Estoque",
+      "teste": "Linha: inicial + entradas − vendida − perdas = final",
+      "resultado": "PASS",
+      "severidade": "-",
+      "detalhe": "0 linhas"
+    },
+    {
+      "area": "Estoque",
+      "teste": "Sem saldo final negativo",
+      "resultado": "PASS",
+      "severidade": "-",
+      "detalhe": "0"
+    },
+    {
+      "area": "Estoque",
+      "teste": "Encadeamento: inicial do mês = último final conhecido",
+      "resultado": "PASS",
+      "severidade": "-",
+      "detalhe": "0 quebras"
+    },
+    {
+      "area": "Reconciliação",
+      "teste": "Quantidade vendida (itens) = qtd_vendida (estoque) por mês/loja/SKU",
+      "resultado": "PASS",
+      "severidade": "-",
+      "detalhe": "0 combinações divergentes; itens=422215 estoque=422215"
+    },
+    {
+      "area": "Estoque",
+      "teste": "Todo par loja/SKU do mensal existe no estoque inicial",
+      "resultado": "PASS",
+      "severidade": "-",
+      "detalhe": "0"
+    },
+    {
+      "area": "Financeiro",
+      "teste": "Despesa total = soma das rubricas",
+      "resultado": "PASS",
+      "severidade": "-",
+      "detalhe": "0"
+    },
+    {
+      "area": "Complementar",
+      "teste": "Recebimentos = entradas do estoque (mês/loja/SKU)",
+      "resultado": "PASS",
+      "severidade": "-",
+      "detalhe": "0"
+    },
+    {
+      "area": "Complementar",
+      "teste": "valor_recebido = quantidade × custo",
+      "resultado": "PASS",
+      "severidade": "-",
+      "detalhe": "0"
+    },
+    {
+      "area": "Plausibilidade",
+      "teste": "Compras recebidas plausíveis frente ao CMV (≥ 50% do CMV em 24 meses)",
+      "resultado": "PASS",
+      "severidade": "-",
+      "detalhe": "Compras R$ 13,360,752.12 = 62.9% do CMV. Entradas físicas: 265,510 un vs vendidas 422,215 un"
+    },
+    {
+      "area": "Complementar",
+      "teste": "Resultado gerencial: receita/CMV = f_vendas por mês/loja",
+      "resultado": "PASS",
+      "severidade": "-",
+      "detalhe": ""
+    },
+    {
+      "area": "Complementar",
+      "teste": "Lotes 30/09/2026 = saldo final por loja/SKU",
+      "resultado": "PASS",
+      "severidade": "-",
+      "detalhe": "0 pares; saldo=245,063 lotes=245,063"
+    },
+    {
+      "area": "Complementar",
+      "teste": "Taxa de entrega no prazo documentada",
+      "resultado": "PASS",
+      "severidade": "-",
+      "detalhe": "42.4%"
+    }
+  ],
+  "totais_referencia": {
+    "receita_bruta": 36821295.17,
+    "descontos": 1760583.17,
+    "receita_liquida": 35060712.0,
+    "cmv": 21252002.94,
+    "lucro_bruto": 13808709.06,
+    "despesas": 6061566.28,
+    "meta_receita": 36987069.12,
+    "cupons": 143399,
+    "unidades": 422215,
+    "clientes_identificados": 19038,
+    "compras_recebidas": 13360752.12,
+    "pct_anonimo": 0.1712,
+    "receita_2025": 16997629.12
+  }
+}

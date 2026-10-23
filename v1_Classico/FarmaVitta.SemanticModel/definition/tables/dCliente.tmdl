@@ -1,0 +1,152 @@
+/// Clientes sintéticos (22.000) + membro 'NI' para cupons anônimos. RFV é fotografia em 30/09/2026.
+table dCliente
+	lineageTag: 8152b18e-7a43-5e50-a53f-bca0c6ff5eaf
+
+	column id_cliente
+		dataType: string
+		isHidden
+		lineageTag: 4e677f33-5e30-5da9-8116-b71657e338c5
+		summarizeBy: none
+		sourceColumn: id_cliente
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Cidade Cadastro'
+		dataType: string
+		lineageTag: f5a40f78-2d03-55cb-bdeb-c4b8969ec818
+		summarizeBy: none
+		sourceColumn: cidade_cadastro
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Data Cadastro'
+		dataType: dateTime
+		formatString: dd/MM/yyyy
+		lineageTag: 6d864893-7dc5-5657-8ecc-4ca2d02a5a1d
+		summarizeBy: none
+		sourceColumn: data_cadastro
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation UnderlyingDateTimeDataType = Date
+
+	column 'Segmento Cadastro'
+		dataType: string
+		lineageTag: 293d1602-6ba0-557e-b9c5-2e8064ab9e1d
+		summarizeBy: none
+		sourceColumn: segmento_cadastro
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Faixa Etaria'
+		dataType: string
+		lineageTag: 1c0b0f62-d73b-5bf9-a17d-a61fb4a54eb1
+		summarizeBy: none
+		sourceColumn: faixa_etaria
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Tipo Cliente'
+		dataType: string
+		lineageTag: 53af91df-ae32-5c98-94c1-6bf1218dba86
+		summarizeBy: none
+		sourceColumn: Tipo Cliente
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Segmento RFV'
+		dataType: string
+		lineageTag: 5f1e7c2b-6087-5a43-a572-a500b491c4a5
+		summarizeBy: none
+		sourceColumn: segmento_rfv
+		sortByColumn: 'Ordem RFV'
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Ordem RFV'
+		dataType: int64
+		isHidden
+		lineageTag: adeaf5a5-fdb9-56e4-b5a7-07ef6143eb38
+		summarizeBy: none
+		sourceColumn: ordem_segmento
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Recencia Dias'
+		dataType: int64
+		lineageTag: e3dc1c18-c06a-51b7-b9e5-28ce8bccd1a6
+		summarizeBy: none
+		sourceColumn: recencia_dias
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Frequencia RFV'
+		dataType: int64
+		lineageTag: ab58ea10-59bf-51f9-ad13-639235b8faa4
+		summarizeBy: none
+		sourceColumn: frequencia
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Valor RFV'
+		dataType: double
+		formatString: \R\$ #,0.00
+		lineageTag: bba60bde-c5a7-5f1c-a84e-c60224c359f7
+		summarizeBy: none
+		sourceColumn: valor
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Score R'
+		dataType: int64
+		lineageTag: f4bc6171-1a2c-502f-8f42-1d4e46414724
+		summarizeBy: none
+		sourceColumn: score_r
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Score F'
+		dataType: int64
+		lineageTag: e3c9b951-a8c0-5a88-8035-99e63677790c
+		summarizeBy: none
+		sourceColumn: score_f
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Score V'
+		dataType: int64
+		lineageTag: 470adfe1-4d26-5d01-a203-1fea2aeba462
+		summarizeBy: none
+		sourceColumn: score_v
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Data Primeira Compra'
+		dataType: dateTime
+		formatString: dd/MM/yyyy
+		lineageTag: 3ca0d9a5-3551-5e63-a328-e9c2be753171
+		summarizeBy: none
+		sourceColumn: data_primeira_compra
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation UnderlyingDateTimeDataType = Date
+
+	partition dCliente = m
+		mode: import
+		source =
+				let
+				    Fonte = Table.TransformColumnTypes(fnCsv("01_Dados_Originais\base_original\dim_clientes.csv"), {{"data_cadastro", type date}}, "en-US"),
+				    Rfv = Table.TransformColumnTypes(fnCsv("02_Dados_Tratados\d_cliente_rfv.csv"), {{"recencia_dias", Int64.Type}, {"frequencia", Int64.Type}, {"valor", type number}, {"score_r", Int64.Type}, {"score_f", Int64.Type}, {"score_v", Int64.Type}, {"ordem_segmento", Int64.Type}, {"data_primeira_compra", type date}}, "en-US"),
+				    J = Table.NestedJoin(Fonte, "id_cliente", Rfv, "id_cliente", "r", JoinKind.LeftOuter),
+				    E = Table.ExpandTableColumn(J, "r", {"recencia_dias","frequencia","valor","score_r","score_f","score_v","segmento_rfv","ordem_segmento","data_primeira_compra"}),
+				    SemCompra = Table.TransformColumns(E, {{"segmento_rfv", each if _ = null then "Sem compra" else _, type text}, {"ordem_segmento", each if _ = null then 7 else _, Int64.Type}}),
+				    Tipo = Table.AddColumn(SemCompra, "Tipo Cliente", each "Identificado", type text),
+				    NI = #table(Table.ColumnNames(Tipo), {List.Transform(Table.ColumnNames(Tipo), each if _ = "id_cliente" then "NI" else if _ = "Tipo Cliente" then "Não identificado" else if _ = "segmento_rfv" then "Não identificado" else if _ = "ordem_segmento" then 8 else if List.Contains({"cidade_cadastro","segmento_cadastro","faixa_etaria"}, _) then "Não identificado" else null)}),
+				    Uniao = Table.Combine({Tipo, NI}),
+				    Tipos = Table.TransformColumnTypes(Uniao, {{"ordem_segmento", Int64.Type}, {"recencia_dias", Int64.Type}, {"frequencia", Int64.Type}, {"valor", type number}, {"score_r", Int64.Type}, {"score_f", Int64.Type}, {"score_v", Int64.Type}, {"data_primeira_compra", type date}, {"data_cadastro", type date}}),
+				    Final = Table.SelectColumns(Tipos, {"id_cliente", "cidade_cadastro", "data_cadastro", "segmento_cadastro", "faixa_etaria", "Tipo Cliente", "segmento_rfv", "ordem_segmento", "recencia_dias", "frequencia", "valor", "score_r", "score_f", "score_v", "data_primeira_compra"})
+				in
+				    Final
+
+	annotation PBI_ResultType = Table

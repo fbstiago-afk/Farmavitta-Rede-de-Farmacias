@@ -1,0 +1,108 @@
+/// Previsão de receita mensal por loja (6 meses, v1.0, treino até 30/09/2026). Projeção não é meta nem fato.
+table fForecast
+	lineageTag: 1fb66ecf-0fa0-5419-ab5c-f6f1f3306eb7
+
+	column ano_mes
+		dataType: string
+		isHidden
+		lineageTag: eca8c1bc-316b-5340-8923-69db1f7a83a6
+		summarizeBy: none
+		sourceColumn: ano_mes
+
+		annotation SummarizationSetBy = Automatic
+
+	column data_mes
+		dataType: dateTime
+		formatString: dd/MM/yyyy
+		isHidden
+		lineageTag: 68baf834-ef96-56b9-aec2-d34a04109f28
+		summarizeBy: none
+		sourceColumn: data_mes
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation UnderlyingDateTimeDataType = Date
+
+	column id_loja
+		dataType: string
+		isHidden
+		lineageTag: d1f21c7a-03e1-5f2b-867f-358cd934275a
+		summarizeBy: none
+		sourceColumn: id_loja
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Tipo Serie'
+		dataType: string
+		lineageTag: ff4ab09d-0793-5ddc-b4d5-e9dbfd8422c6
+		summarizeBy: none
+		sourceColumn: tipo
+
+		annotation SummarizationSetBy = Automatic
+
+	column Metodo
+		dataType: string
+		lineageTag: 4db09d0d-f07d-53e2-841f-1df56d4e8bef
+		summarizeBy: none
+		sourceColumn: metodo
+
+		annotation SummarizationSetBy = Automatic
+
+	column valor_real
+		dataType: double
+		isHidden
+		lineageTag: fc5ebbf6-deb6-5f4b-9f1b-fc41300e15c8
+		summarizeBy: none
+		sourceColumn: valor_real
+
+		annotation SummarizationSetBy = Automatic
+
+	column previsao
+		dataType: double
+		isHidden
+		lineageTag: e9e22642-71f7-534f-9503-89d9dbb6e6e5
+		summarizeBy: none
+		sourceColumn: previsao
+
+		annotation SummarizationSetBy = Automatic
+
+	column limite_inferior
+		dataType: double
+		isHidden
+		lineageTag: d95b9dcd-fb73-5ace-b1e4-ac5e2049529f
+		summarizeBy: none
+		sourceColumn: limite_inferior
+
+		annotation SummarizationSetBy = Automatic
+
+	column limite_superior
+		dataType: double
+		isHidden
+		lineageTag: 7bf8ce64-d03e-5fa5-83e1-1030a5f8d6ab
+		summarizeBy: none
+		sourceColumn: limite_superior
+
+		annotation SummarizationSetBy = Automatic
+
+	column wape_backtest
+		dataType: double
+		isHidden
+		lineageTag: 0ac74f35-3553-5e7e-aa87-5c6cc4206687
+		summarizeBy: none
+		sourceColumn: wape_backtest
+
+		annotation SummarizationSetBy = Automatic
+
+	partition fForecast = m
+		mode: import
+		source =
+				let
+				    Fonte = fnCsv("02_Dados_Tratados\f_forecast_receita.csv"),
+				    Tipado = Table.TransformColumnTypes(Fonte, {{"ano_mes", type text}, {"id_loja", type text}, {"tipo", type text}, {"metodo", type text}, {"valor_real", type number}, {"previsao", type number}, {"limite_inferior", type number}, {"limite_superior", type number}, {"wape_backtest", type number}}, "en-US"),
+				    DataMes = Table.AddColumn(Tipado, "data_mes", each Date.FromText([ano_mes] & "-01"), type date),
+				    Ultimo = DataMes,
+				    Final = Table.SelectColumns(Ultimo, {"ano_mes", "data_mes", "id_loja", "tipo", "metodo", "valor_real", "previsao", "limite_inferior", "limite_superior", "wape_backtest"})
+				in
+				    Final
+
+	annotation PBI_ResultType = Table

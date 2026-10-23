@@ -1,0 +1,16 @@
+expression PastaProjeto = "E:\Projetos BI\17 - Farmavitta\" meta [IsParameterQuery=true, Type="Text", IsParameterQueryRequired=true]
+	lineageTag: 3bab2412-c416-533a-86ae-a79cee954be3
+
+	annotation PBI_ResultType = Text
+
+expression fnCsv =
+		(caminho as text) as table =>
+		let
+		    Fonte = Csv.Document(File.Contents(PastaProjeto & caminho), [Delimiter = ";", Encoding = 65001, QuoteStyle = QuoteStyle.Csv]),
+		    Cabecalho = Table.PromoteHeaders(Fonte, [PromoteAllScalars = true])
+		in
+		    Cabecalho
+	lineageTag: 94ba3666-1420-5a5e-adc7-29062475d6ee
+
+	annotation PBI_ResultType = Function
+

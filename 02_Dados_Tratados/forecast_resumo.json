@@ -1,0 +1,14 @@
+{
+  "melhor_metodo": {
+    "L001": "Sazonal YoY",
+    "L002": "Holt amortecido",
+    "L003": "Holt amortecido",
+    "L004": "Sazonal YoY"
+  },
+  "wape": {
+    "L001": 0.0792,
+    "L002": 0.0936,
+    "L003": 0.0628,
+    "L004": 0.0913
+  }
+}

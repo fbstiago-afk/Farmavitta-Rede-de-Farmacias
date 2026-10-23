@@ -1,0 +1,5 @@
+* text=auto
+*.csv -text
+*.png binary
+*.jpg binary
+*.docx binary

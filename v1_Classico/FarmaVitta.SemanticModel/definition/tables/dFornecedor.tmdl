@@ -1,0 +1,49 @@
+/// Fornecedores fictícios (60). Filtra fatos via dProduto (snowflake 1:N).
+table dFornecedor
+	lineageTag: 087dc551-d730-5875-8824-7931184d4409
+
+	column id_fornecedor
+		dataType: string
+		isHidden
+		lineageTag: 1706d052-57c1-547f-9fb3-c864cf949ec0
+		summarizeBy: none
+		sourceColumn: id_fornecedor
+
+		annotation SummarizationSetBy = Automatic
+
+	column Fornecedor
+		dataType: string
+		lineageTag: 2e510b4c-602a-5770-9518-c69c372b26c6
+		summarizeBy: none
+		sourceColumn: razao_social_ficticia
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'UF Fornecedor'
+		dataType: string
+		lineageTag: c3b702dd-1ff3-53ec-9de1-e7744e99c542
+		summarizeBy: none
+		sourceColumn: uf
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Prazo Medio Dias'
+		dataType: int64
+		lineageTag: 95e8cb73-4f2e-5529-bd45-2ba6a645ef2b
+		summarizeBy: none
+		sourceColumn: prazo_medio_dias
+
+		annotation SummarizationSetBy = Automatic
+
+	partition dFornecedor = m
+		mode: import
+		source =
+				let
+				    Fonte = fnCsv("01_Dados_Originais\base_original\dim_fornecedores.csv"),
+				    Tipado = Table.TransformColumnTypes(Fonte, {{"id_fornecedor", type text}, {"razao_social_ficticia", type text}, {"uf", type text}, {"prazo_medio_dias", Int64.Type}}, "en-US"),
+				    Ultimo = Tipado,
+				    Final = Table.SelectColumns(Ultimo, {"id_fornecedor", "razao_social_ficticia", "uf", "prazo_medio_dias"})
+				in
+				    Final
+
+	annotation PBI_ResultType = Table

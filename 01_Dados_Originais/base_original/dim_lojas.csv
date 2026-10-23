@@ -1,0 +1,5 @@
+﻿id_loja;cidade;uf;nome_loja;data_abertura;indice_demanda
+L001;Campinas;SP;Campinas - Cambuí;2021-03-15;1.21
+L002;Jundiaí;SP;Jundiaí - Centro;2022-05-10;1.04
+L003;Sorocaba;SP;Sorocaba - Campolim;2023-02-01;1.12
+L004;Piracicaba;SP;Piracicaba - Centro;2024-06-12;0.91

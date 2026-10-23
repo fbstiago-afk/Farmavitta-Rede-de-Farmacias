@@ -1,0 +1,78 @@
+/// Lojas (4).
+table dLoja
+	lineageTag: 4315c5de-28c2-5318-aa9a-c22778dc5fb6
+
+	column id_loja
+		dataType: string
+		isHidden
+		lineageTag: 3154a9b8-9f69-5b27-82a2-da690683304c
+		summarizeBy: none
+		sourceColumn: id_loja
+
+		annotation SummarizationSetBy = Automatic
+
+	column Loja
+		dataType: string
+		lineageTag: af042ae1-f23e-5320-a7d6-33030694103c
+		summarizeBy: none
+		sourceColumn: nome_loja
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Loja Curta'
+		dataType: string
+		lineageTag: eade808d-5cfd-5184-a138-61fe3de468f7
+		summarizeBy: none
+		sourceColumn: Loja Curta
+
+		annotation SummarizationSetBy = Automatic
+
+	column Cidade
+		dataType: string
+		lineageTag: 589788f2-11b5-5128-b768-f32ca0c6bf81
+		summarizeBy: none
+		sourceColumn: cidade
+
+		annotation SummarizationSetBy = Automatic
+
+	column UF
+		dataType: string
+		lineageTag: d83f8af0-3bb8-59df-ab88-7e466c30ce87
+		summarizeBy: none
+		sourceColumn: uf
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Data Abertura'
+		dataType: dateTime
+		formatString: dd/MM/yyyy
+		lineageTag: 2c752327-b9eb-599b-b0bc-042824db1ee2
+		summarizeBy: none
+		sourceColumn: data_abertura
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation UnderlyingDateTimeDataType = Date
+
+	column 'Indice Demanda'
+		dataType: double
+		formatString: 0.00
+		lineageTag: 95876d59-ffd0-5200-a7ca-7877fb8c5841
+		summarizeBy: none
+		sourceColumn: indice_demanda
+
+		annotation SummarizationSetBy = Automatic
+
+	partition dLoja = m
+		mode: import
+		source =
+				let
+				    Fonte = fnCsv("01_Dados_Originais\base_original\dim_lojas.csv"),
+				    Tipado = Table.TransformColumnTypes(Fonte, {{"id_loja", type text}, {"nome_loja", type text}, {"cidade", type text}, {"uf", type text}, {"data_abertura", type date}, {"indice_demanda", type number}}, "en-US"),
+				    Curta = Table.AddColumn(Tipado, "Loja Curta", each [cidade], type text),
+				    Ultimo = Curta,
+				    Final = Table.SelectColumns(Ultimo, {"id_loja", "nome_loja", "Loja Curta", "cidade", "uf", "data_abertura", "indice_demanda"})
+				in
+				    Final
+
+	annotation PBI_ResultType = Table

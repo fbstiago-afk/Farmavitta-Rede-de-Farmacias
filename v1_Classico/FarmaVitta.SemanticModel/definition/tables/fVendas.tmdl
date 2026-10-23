@@ -1,0 +1,141 @@
+/// Fato cupom (1 linha por venda). Fonte oficial de receita, desconto e CMV da rede.
+table fVendas
+	lineageTag: 117c5488-e491-595f-8d27-62411d75abb6
+
+	column id_venda
+		dataType: string
+		isHidden
+		lineageTag: c916df7d-e855-5ab0-b9ef-cca02830e6fd
+		summarizeBy: none
+		sourceColumn: id_venda
+
+		annotation SummarizationSetBy = Automatic
+
+	column data_venda
+		dataType: dateTime
+		formatString: dd/MM/yyyy
+		isHidden
+		lineageTag: f2086543-f1f3-584c-8b0e-b4252d25409d
+		summarizeBy: none
+		sourceColumn: data_venda
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation UnderlyingDateTimeDataType = Date
+
+	column id_loja
+		dataType: string
+		isHidden
+		lineageTag: aff33e4e-29e4-5bf5-91a9-d707c84351bd
+		summarizeBy: none
+		sourceColumn: id_loja
+
+		annotation SummarizationSetBy = Automatic
+
+	column id_cliente
+		dataType: string
+		isHidden
+		lineageTag: f32f195a-602a-5547-abe3-205ecdf7db17
+		summarizeBy: none
+		sourceColumn: id_cliente
+
+		annotation SummarizationSetBy = Automatic
+
+	column canal
+		dataType: string
+		isHidden
+		lineageTag: fc10b61c-0661-5d0a-ae74-504b3c273cef
+		summarizeBy: none
+		sourceColumn: canal
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Forma Pagamento'
+		dataType: string
+		lineageTag: d6f5dc75-814a-573b-aa87-12dfee34c1e9
+		summarizeBy: none
+		sourceColumn: forma_pagamento
+
+		annotation SummarizationSetBy = Automatic
+
+	column qtd_itens_distintos
+		dataType: int64
+		isHidden
+		lineageTag: 8544de00-4df7-59c8-97a7-7be56d8dd562
+		summarizeBy: none
+		sourceColumn: qtd_itens_distintos
+
+		annotation SummarizationSetBy = Automatic
+
+	column valor_bruto
+		dataType: double
+		isHidden
+		lineageTag: 70b6ea78-296f-50e8-9284-591b4343b933
+		summarizeBy: none
+		sourceColumn: valor_bruto
+
+		annotation SummarizationSetBy = Automatic
+
+	column valor_desconto
+		dataType: double
+		isHidden
+		lineageTag: c9087e12-1456-53b7-877d-b18764bae6ef
+		summarizeBy: none
+		sourceColumn: valor_desconto
+
+		annotation SummarizationSetBy = Automatic
+
+	column valor_liquido
+		dataType: double
+		isHidden
+		lineageTag: ac8226a4-af1f-5555-9e76-7531429576a3
+		summarizeBy: none
+		sourceColumn: valor_liquido
+
+		annotation SummarizationSetBy = Automatic
+
+	column custo_mercadoria
+		dataType: double
+		isHidden
+		lineageTag: 32c39a3d-33da-519a-8662-c4e1dbb7d073
+		summarizeBy: none
+		sourceColumn: custo_mercadoria
+
+		annotation SummarizationSetBy = Automatic
+
+	column cliente_identificado
+		dataType: boolean
+		isHidden
+		lineageTag: 881cc2ee-5f71-5b32-94e0-286805a7fba9
+		summarizeBy: none
+		sourceColumn: cliente_identificado
+
+		annotation SummarizationSetBy = Automatic
+
+	column primeira_compra
+		dataType: boolean
+		isHidden
+		lineageTag: 2b1fc9af-4332-5c8f-9948-354974ae0508
+		summarizeBy: none
+		sourceColumn: primeira_compra
+
+		annotation SummarizationSetBy = Automatic
+
+	partition fVendas = m
+		mode: import
+		source =
+				let
+				    Fonte = fnCsv("01_Dados_Originais\base_original\f_vendas.csv"),
+				    Tipado = Table.TransformColumnTypes(Fonte, {{"id_venda", type text}, {"data_venda", type date}, {"id_loja", type text}, {"id_cliente", type text}, {"canal", type text}, {"forma_pagamento", type text}, {"qtd_itens_distintos", Int64.Type}, {"valor_bruto", type number}, {"valor_desconto", type number}, {"valor_liquido", type number}, {"custo_mercadoria", type number}}, "en-US"),
+				    Anon = Table.ReplaceValue(Tipado, "", "NI", Replacer.ReplaceValue, {"id_cliente"}),
+				    Ident = Table.AddColumn(Anon, "cliente_identificado", each [id_cliente] <> "NI", type logical),
+				    Rfv = Table.TransformColumnTypes(Table.SelectColumns(fnCsv("02_Dados_Tratados\d_cliente_rfv.csv"), {"id_cliente", "data_primeira_compra"}), {{"data_primeira_compra", type date}}, "en-US"),
+				    J = Table.NestedJoin(Ident, "id_cliente", Rfv, "id_cliente", "r", JoinKind.LeftOuter),
+				    E = Table.ExpandTableColumn(J, "r", {"data_primeira_compra"}),
+				    Primeira = Table.AddColumn(E, "primeira_compra", each [data_primeira_compra] <> null and [data_venda] = [data_primeira_compra], type logical),
+				    Ultimo = Primeira,
+				    Final = Table.SelectColumns(Ultimo, {"id_venda", "data_venda", "id_loja", "id_cliente", "canal", "forma_pagamento", "qtd_itens_distintos", "valor_bruto", "valor_desconto", "valor_liquido", "custo_mercadoria", "cliente_identificado", "primeira_compra"})
+				in
+				    Final
+
+	annotation PBI_ResultType = Table

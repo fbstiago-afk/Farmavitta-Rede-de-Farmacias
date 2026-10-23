@@ -1,0 +1,65 @@
+/// Metas mensais por loja.
+table fMetas
+	lineageTag: b9717525-b327-59bf-96e0-c588e90dc13a
+
+	column ano_mes
+		dataType: string
+		isHidden
+		lineageTag: a24eb54a-bf94-5e37-9c04-e94b1422198c
+		summarizeBy: none
+		sourceColumn: ano_mes
+
+		annotation SummarizationSetBy = Automatic
+
+	column data_mes
+		dataType: dateTime
+		formatString: dd/MM/yyyy
+		isHidden
+		lineageTag: 4e1694b9-17dd-54b2-a315-7d94452d041f
+		summarizeBy: none
+		sourceColumn: data_mes
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation UnderlyingDateTimeDataType = Date
+
+	column id_loja
+		dataType: string
+		isHidden
+		lineageTag: dddff60e-9bd8-5634-bf83-c4242f343c90
+		summarizeBy: none
+		sourceColumn: id_loja
+
+		annotation SummarizationSetBy = Automatic
+
+	column meta_receita
+		dataType: double
+		isHidden
+		lineageTag: 7d65af14-9422-502d-be5f-7821b564cfad
+		summarizeBy: none
+		sourceColumn: meta_receita
+
+		annotation SummarizationSetBy = Automatic
+
+	column meta_lucro_bruto
+		dataType: double
+		isHidden
+		lineageTag: 4fb2f8de-8e61-5d37-8a2d-91b13fb3a568
+		summarizeBy: none
+		sourceColumn: meta_lucro_bruto
+
+		annotation SummarizationSetBy = Automatic
+
+	partition fMetas = m
+		mode: import
+		source =
+				let
+				    Fonte = fnCsv("01_Dados_Originais\base_original\f_metas_mensais.csv"),
+				    Tipado = Table.TransformColumnTypes(Fonte, {{"ano_mes", type text}, {"id_loja", type text}, {"meta_receita", type number}, {"meta_lucro_bruto", type number}}, "en-US"),
+				    DataMes = Table.AddColumn(Tipado, "data_mes", each Date.FromText([ano_mes] & "-01"), type date),
+				    Ultimo = DataMes,
+				    Final = Table.SelectColumns(Ultimo, {"ano_mes", "data_mes", "id_loja", "meta_receita", "meta_lucro_bruto"})
+				in
+				    Final
+
+	annotation PBI_ResultType = Table

@@ -1,0 +1,152 @@
+/// Calendário diário 01/10/2024–31/03/2027 (inclui horizonte de previsão). Dia útil vem de dim_calendario; datas futuras: seg–sex.
+table dCalendario
+	lineageTag: dfbf209b-1d34-5582-9208-bee121ca21b8
+	dataCategory: Time
+
+	column Data
+		dataType: dateTime
+		formatString: dd/MM/yyyy
+		isKey
+		lineageTag: 1adbf866-568d-56c6-b983-2251becca365
+		summarizeBy: none
+		sourceColumn: Data
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation UnderlyingDateTimeDataType = Date
+
+	column Ano
+		dataType: int64
+		lineageTag: 7e24bc3f-f985-5021-b857-589e84574c46
+		summarizeBy: none
+		sourceColumn: Ano
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Mes Num'
+		dataType: int64
+		isHidden
+		lineageTag: 7c7164c9-9192-57fd-943f-73b76eb8eeda
+		summarizeBy: none
+		sourceColumn: Mes Num
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Mes Nome'
+		dataType: string
+		lineageTag: 6a17493e-380e-5dda-9860-a1bcc2cb6b8e
+		summarizeBy: none
+		sourceColumn: Mes Nome
+		sortByColumn: 'Mes Num'
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Mes Ano'
+		dataType: string
+		lineageTag: 51b08361-6dfe-5c56-b04d-5fac84eda911
+		summarizeBy: none
+		sourceColumn: Mes Ano
+		sortByColumn: 'AnoMes Num'
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'AnoMes Num'
+		dataType: int64
+		isHidden
+		lineageTag: e110e9b3-75e4-5aa8-bc4a-d2129e160cfe
+		summarizeBy: none
+		sourceColumn: AnoMes Num
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Ano Mes'
+		dataType: string
+		lineageTag: 8524ff0a-a112-5fe6-9974-724e48324710
+		summarizeBy: none
+		sourceColumn: Ano Mes
+
+		annotation SummarizationSetBy = Automatic
+
+	column Trimestre
+		dataType: string
+		lineageTag: bf1a2977-1fe9-51fa-9580-1088fb967374
+		summarizeBy: none
+		sourceColumn: Trimestre
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Dia Semana Num'
+		dataType: int64
+		isHidden
+		lineageTag: 659ef880-77e1-54c2-9aaf-8d15f56d5d92
+		summarizeBy: none
+		sourceColumn: Dia Semana Num
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Dia Semana'
+		dataType: string
+		lineageTag: b0ac2774-ba1e-550d-8ace-1c405866ac52
+		summarizeBy: none
+		sourceColumn: Dia Semana
+		sortByColumn: 'Dia Semana Num'
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Dia Util'
+		dataType: boolean
+		lineageTag: 85271a85-2359-5e56-b930-6e7a583340c9
+		summarizeBy: none
+		sourceColumn: Dia Util
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Inicio Mes'
+		dataType: dateTime
+		formatString: dd/MM/yyyy
+		lineageTag: e005c7db-e1d3-5921-99c6-a80f6aae11cd
+		summarizeBy: none
+		sourceColumn: Inicio Mes
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation UnderlyingDateTimeDataType = Date
+
+	column Periodo
+		dataType: string
+		lineageTag: 8b68f247-772d-56c2-8064-6c788eea44e8
+		summarizeBy: none
+		sourceColumn: Periodo
+
+		annotation SummarizationSetBy = Automatic
+
+	partition dCalendario = m
+		mode: import
+		source =
+				let
+				    Inicio = #date(2024, 10, 1),
+				    Fim = #date(2027, 3, 31),
+				    Datas = List.Dates(Inicio, Duration.Days(Fim - Inicio) + 1, #duration(1, 0, 0, 0)),
+				    Base = Table.FromList(Datas, Splitter.SplitByNothing(), type table [Data = date]),
+				    Meses = {"jan","fev","mar","abr","mai","jun","jul","ago","set","out","nov","dez"},
+				    Dias = {"dom","seg","ter","qua","qui","sex","sáb"},
+				    Ano = Table.AddColumn(Base, "Ano", each Date.Year([Data]), Int64.Type),
+				    MesNum = Table.AddColumn(Ano, "Mes Num", each Date.Month([Data]), Int64.Type),
+				    MesNome = Table.AddColumn(MesNum, "Mes Nome", each Meses{[Mes Num] - 1}, type text),
+				    MesAno = Table.AddColumn(MesNome, "Mes Ano", each [Mes Nome] & "/" & Text.End(Text.From([Ano]), 2), type text),
+				    AnoMesNum = Table.AddColumn(MesAno, "AnoMes Num", each [Ano] * 100 + [Mes Num], Int64.Type),
+				    AnoMes = Table.AddColumn(AnoMesNum, "Ano Mes", each Text.From([Ano]) & "-" & Text.PadStart(Text.From([Mes Num]), 2, "0"), type text),
+				    Tri = Table.AddColumn(AnoMes, "Trimestre", each "T" & Text.From(Date.QuarterOfYear([Data])), type text),
+				    DiaNum = Table.AddColumn(Tri, "Dia Semana Num", each Date.DayOfWeek([Data], Day.Sunday), Int64.Type),
+				    DiaNome = Table.AddColumn(DiaNum, "Dia Semana", each Dias{[Dia Semana Num]}, type text),
+				    Csv = Table.TransformColumnTypes(fnCsv("01_Dados_Originais\base_original\dim_calendario.csv"), {{"data", type date}, {"dia_util", Int64.Type}}, "en-US"),
+				    Junta = Table.NestedJoin(DiaNome, "Data", Csv, "data", "c", JoinKind.LeftOuter),
+				    Exp = Table.ExpandTableColumn(Junta, "c", {"dia_util"}),
+				    DiaUtil = Table.AddColumn(Exp, "Dia Util", each if [dia_util] <> null then [dia_util] = 1 else [Dia Semana Num] >= 1 and [Dia Semana Num] <= 5, type logical),
+				    IniMes = Table.AddColumn(DiaUtil, "Inicio Mes", each Date.StartOfMonth([Data]), type date),
+				    Periodo = Table.AddColumn(IniMes, "Periodo", each if [Data] <= #date(2026, 9, 30) then "Realizado" else "Projeção", type text),
+				    Final = Table.SelectColumns(Periodo, {"Data","Ano","Mes Num","Mes Nome","Mes Ano","AnoMes Num","Ano Mes","Trimestre","Dia Semana Num","Dia Semana","Dia Util","Inicio Mes","Periodo"})
+				in
+				    Final
+
+	annotation PBI_ResultType = Table

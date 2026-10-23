@@ -1,0 +1,4 @@
+﻿id_cenario;cenario;fator_receita;fator_custo;descricao
+C01;Conservador;0.94;1.04;Receita -6%, custo +4%
+C02;Base;1;1;Sem ajuste
+C03;Otimista;1.08;0.98;Receita +8%, custo -2%

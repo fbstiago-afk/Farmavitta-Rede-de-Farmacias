@@ -1,0 +1,15 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/page/2.0.0/schema.json",
+  "name": "be40bf8c35b15bc99c9d",
+  "displayName": "TT Loja",
+  "displayOption": "FitToPage",
+  "height": 250,
+  "width": 380,
+  "type": "Tooltip",
+  "pageBinding": {
+    "name": "1bc2d37fd0f05d879813",
+    "type": "Tooltip",
+    "referenceScope": "Default"
+  },
+  "visibility": "HiddenInViewMode"
+}

@@ -1,0 +1,74 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/report/3.0.0/schema.json",
+  "themeCollection": {
+    "customTheme": {
+      "name": "FarmaVitta_Tema.json",
+      "reportVersionAtImport": {
+        "visual": "2.2.0",
+        "report": "3.0.0",
+        "page": "2.0.0"
+      },
+      "type": "RegisteredResources"
+    }
+  },
+  "resourcePackages": [
+    {
+      "name": "RegisteredResources",
+      "type": "RegisteredResources",
+      "items": [
+        {
+          "name": "FarmaVitta_Tema.json",
+          "path": "FarmaVitta_Tema.json",
+          "type": "CustomTheme"
+        },
+        {
+          "name": "bg_home.png",
+          "path": "bg_home.png",
+          "type": "Image"
+        },
+        {
+          "name": "bg_exec.png",
+          "path": "bg_exec.png",
+          "type": "Image"
+        },
+        {
+          "name": "bg_com.png",
+          "path": "bg_com.png",
+          "type": "Image"
+        },
+        {
+          "name": "bg_prod.png",
+          "path": "bg_prod.png",
+          "type": "Image"
+        },
+        {
+          "name": "bg_compras.png",
+          "path": "bg_compras.png",
+          "type": "Image"
+        },
+        {
+          "name": "bg_estoque.png",
+          "path": "bg_estoque.png",
+          "type": "Image"
+        },
+        {
+          "name": "bg_fin.png",
+          "path": "bg_fin.png",
+          "type": "Image"
+        },
+        {
+          "name": "bg_fc.png",
+          "path": "bg_fc.png",
+          "type": "Image"
+        }
+      ]
+    }
+  ],
+  "settings": {
+    "useStylableVisualContainerHeader": true,
+    "exportDataMode": "AllowSummarized",
+    "defaultDrillFilterOtherVisuals": true,
+    "allowChangeFilterTypes": true,
+    "useEnhancedTooltips": true
+  }
+}
