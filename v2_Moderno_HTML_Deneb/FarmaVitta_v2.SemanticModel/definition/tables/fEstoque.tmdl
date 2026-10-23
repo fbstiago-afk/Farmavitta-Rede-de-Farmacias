@@ -1,0 +1,171 @@
+/// Saldo de estoque reconstruído (grade completa loja×SKU×mês, 02_Dados_Tratados). Semiaditivo: usar medidas de snapshot.
+table fEstoque
+	lineageTag: 8cb6100f-b626-5992-82f9-3339e45fe163
+
+	column ano_mes
+		dataType: string
+		isHidden
+		lineageTag: 6cf33797-e7bd-5116-a128-e7ca28115a84
+		summarizeBy: none
+		sourceColumn: ano_mes
+
+		annotation SummarizationSetBy = Automatic
+
+	column data_mes
+		dataType: dateTime
+		formatString: dd/MM/yyyy
+		isHidden
+		lineageTag: f154005c-3789-57e8-a2f9-d2451ae2d8f1
+		summarizeBy: none
+		sourceColumn: data_mes
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation UnderlyingDateTimeDataType = Date
+
+	column id_loja
+		dataType: string
+		isHidden
+		lineageTag: 47e1c406-3167-5ce9-a95a-d45ce974ebfd
+		summarizeBy: none
+		sourceColumn: id_loja
+
+		annotation SummarizationSetBy = Automatic
+
+	column id_produto
+		dataType: string
+		isHidden
+		lineageTag: 8308b55f-41f3-5b07-ab00-62eb2c25929e
+		summarizeBy: none
+		sourceColumn: id_produto
+
+		annotation SummarizationSetBy = Automatic
+
+	column saldo_inicial
+		dataType: int64
+		isHidden
+		lineageTag: 321f0e5f-238b-5581-93bd-a9e622880046
+		summarizeBy: none
+		sourceColumn: saldo_inicial
+
+		annotation SummarizationSetBy = Automatic
+
+	column qtd_entradas
+		dataType: int64
+		isHidden
+		lineageTag: 4915c4d8-7cff-5dee-ae31-ad03a2c646c3
+		summarizeBy: none
+		sourceColumn: qtd_entradas
+
+		annotation SummarizationSetBy = Automatic
+
+	column qtd_vendida
+		dataType: int64
+		isHidden
+		lineageTag: 5b9e261f-5db4-58e4-a2f4-55c83f1aa63b
+		summarizeBy: none
+		sourceColumn: qtd_vendida
+
+		annotation SummarizationSetBy = Automatic
+
+	column qtd_perdas
+		dataType: int64
+		isHidden
+		lineageTag: bf43680b-fdb4-5668-8b5e-9a3b53310a55
+		summarizeBy: none
+		sourceColumn: qtd_perdas
+
+		annotation SummarizationSetBy = Automatic
+
+	column saldo_final
+		dataType: int64
+		isHidden
+		lineageTag: 644cc61d-032a-57ae-934e-b330607e771b
+		summarizeBy: none
+		sourceColumn: saldo_final
+
+		annotation SummarizationSetBy = Automatic
+
+	column custo_unitario
+		dataType: double
+		isHidden
+		lineageTag: 81d2f299-43ca-5b94-9f23-d900104ea4dd
+		summarizeBy: none
+		sourceColumn: custo_unitario
+
+		annotation SummarizationSetBy = Automatic
+
+	column valor_saldo_final
+		dataType: double
+		isHidden
+		lineageTag: 5dbf8566-4cd2-5119-9f88-d6b01c36fb0c
+		summarizeBy: none
+		sourceColumn: valor_saldo_final
+
+		annotation SummarizationSetBy = Automatic
+
+	column valor_perdas
+		dataType: double
+		isHidden
+		lineageTag: f4e87274-e45e-5c94-9e15-061cf52f16e5
+		summarizeBy: none
+		sourceColumn: valor_perdas
+
+		annotation SummarizationSetBy = Automatic
+
+	column teve_movimento
+		dataType: int64
+		isHidden
+		lineageTag: 015c02c5-eb17-5f11-ac8e-694a4e752c20
+		summarizeBy: none
+		sourceColumn: teve_movimento
+
+		annotation SummarizationSetBy = Automatic
+
+	column venda_media_3m
+		dataType: double
+		isHidden
+		lineageTag: ff444c77-c23c-5845-a9d2-0a857a28b8bc
+		summarizeBy: none
+		sourceColumn: venda_media_3m
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Meses Sem Venda'
+		dataType: int64
+		lineageTag: 3d41366c-550d-59ea-a3fc-26c5263fa0e7
+		summarizeBy: none
+		sourceColumn: meses_sem_venda
+
+		annotation SummarizationSetBy = Automatic
+
+	column cobertura_dias
+		dataType: double
+		isHidden
+		lineageTag: b3b23dab-a6f1-5ee5-bdfe-bf1b36183e90
+		summarizeBy: none
+		sourceColumn: cobertura_dias
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Status Estoque'
+		dataType: string
+		lineageTag: dc50f6c1-e436-5fe3-9223-4f7897e90c05
+		summarizeBy: none
+		sourceColumn: status_estoque
+
+		annotation SummarizationSetBy = Automatic
+
+	partition fEstoque = m
+		mode: import
+		source =
+				let
+				    Fonte = fnCsv("02_Dados_Tratados\f_estoque_saldo_mensal.csv"),
+				    Tipado = Table.TransformColumnTypes(Fonte, {{"ano_mes", type text}, {"id_loja", type text}, {"id_produto", type text}, {"saldo_inicial", Int64.Type}, {"qtd_entradas", Int64.Type}, {"qtd_vendida", Int64.Type}, {"qtd_perdas", Int64.Type}, {"saldo_final", Int64.Type}, {"custo_unitario", type number}, {"valor_saldo_final", type number}, {"valor_perdas", type number}, {"teve_movimento", Int64.Type}, {"venda_media_3m", type number}, {"meses_sem_venda", Int64.Type}, {"cobertura_dias", type number}, {"status_estoque", type text}}, "en-US"),
+				    DataMes = Table.AddColumn(Tipado, "data_mes", each Date.FromText([ano_mes] & "-01"), type date),
+				    Ultimo = DataMes,
+				    Final = Table.SelectColumns(Ultimo, {"ano_mes", "data_mes", "id_loja", "id_produto", "saldo_inicial", "qtd_entradas", "qtd_vendida", "qtd_perdas", "saldo_final", "custo_unitario", "valor_saldo_final", "valor_perdas", "teve_movimento", "venda_media_3m", "meses_sem_venda", "cobertura_dias", "status_estoque"})
+				in
+				    Final
+
+	annotation PBI_ResultType = Table

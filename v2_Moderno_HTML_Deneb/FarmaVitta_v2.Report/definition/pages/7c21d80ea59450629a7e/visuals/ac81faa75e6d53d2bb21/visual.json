@@ -1,0 +1,241 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.2.0/schema.json",
+  "name": "ac81faa75e6d53d2bb21",
+  "position": {
+    "x": 254,
+    "y": 276,
+    "z": 1240,
+    "height": 408,
+    "width": 1028,
+    "tabOrder": 1240
+  },
+  "visual": {
+    "visualType": "deneb7E15AEF80B9E4D4F8E12924291ECE89A",
+    "query": {
+      "queryState": {
+        "dataset": {
+          "projections": [
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "dProduto"
+                    }
+                  },
+                  "Property": "Subcategoria"
+                }
+              },
+              "queryRef": "dProduto.Subcategoria",
+              "nativeQueryRef": "Subcategoria",
+              "displayName": "sub"
+            },
+            {
+              "field": {
+                "Measure": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "_Medidas"
+                    }
+                  },
+                  "Property": "Receita Líquida Itens"
+                }
+              },
+              "queryRef": "_Medidas.Receita Líquida Itens",
+              "nativeQueryRef": "Receita Líquida Itens",
+              "displayName": "rec"
+            }
+          ]
+        }
+      }
+    },
+    "objects": {
+      "vega": [
+        {
+          "properties": {
+            "jsonSpec": {
+              "expr": {
+                "Literal": {
+                  "Value": "'{\"$schema\":\"https://vega.github.io/schema/vega-lite/v5.json\",\"data\":{\"name\":\"dataset\"},\"width\":\"container\",\"height\":\"container\",\"transform\":[{\"window\":[{\"op\":\"sum\",\"field\":\"rec\",\"as\":\"acc\"}],\"sort\":[{\"field\":\"rec\",\"order\":\"descending\"}],\"frame\":[null,0]},{\"joinaggregate\":[{\"op\":\"sum\",\"field\":\"rec\",\"as\":\"tot\"}]},{\"calculate\":\"datum.acc / datum.tot\",\"as\":\"pct\"},{\"calculate\":\"datum.pct - datum.rec / datum.tot < 0.8 ? ''A (até 80%)'' : ''B/C''\",\"as\":\"classe\"}],\"encoding\":{\"x\":{\"field\":\"sub\",\"type\":\"nominal\",\"sort\":\"-y\",\"axis\":{\"title\":null,\"labelAngle\":-40,\"labelLimit\":90}}},\"layer\":[{\"mark\":{\"type\":\"bar\",\"cornerRadiusTopLeft\":3,\"cornerRadiusTopRight\":3},\"encoding\":{\"y\":{\"field\":\"rec\",\"type\":\"quantitative\",\"axis\":{\"title\":null,\"labelExpr\":\"format(datum.value / 1000000, '',.1f'') + '' mi''\"}},\"color\":{\"field\":\"classe\",\"type\":\"nominal\",\"scale\":{\"domain\":[\"A (até 80%)\",\"B/C\"],\"range\":[\"#18B89F\",\"#3D6E72\"]},\"legend\":{\"title\":null}},\"tooltip\":[{\"field\":\"sub\",\"title\":\"Subcategoria\"},{\"field\":\"rec\",\"title\":\"Receita\",\"format\":\",.0f\"},{\"field\":\"pct\",\"title\":\"% acumulado\",\"format\":\".1%\"}]}},{\"mark\":{\"type\":\"line\",\"color\":\"#EF9277\",\"strokeWidth\":2,\"point\":{\"color\":\"#EF9277\",\"size\":22}},\"encoding\":{\"x\":{\"field\":\"sub\",\"type\":\"nominal\",\"sort\":{\"field\":\"rec\",\"order\":\"descending\"}},\"y\":{\"field\":\"pct\",\"type\":\"quantitative\",\"scale\":{\"domain\":[0,1]},\"axis\":{\"title\":null,\"format\":\".0%\",\"orient\":\"right\",\"grid\":false}}}},{\"mark\":{\"type\":\"rule\",\"color\":\"#F2C46D\",\"strokeDash\":[3,3]},\"encoding\":{\"y\":{\"datum\":0.8,\"type\":\"quantitative\",\"scale\":{\"domain\":[0,1]},\"axis\":null}}}],\"resolve\":{\"scale\":{\"y\":\"independent\"}}}'"
+                }
+              }
+            },
+            "jsonConfig": {
+              "expr": {
+                "Literal": {
+                  "Value": "'{\"autosize\":{\"type\":\"fit\",\"contains\":\"padding\"},\"view\":{\"stroke\":\"transparent\"},\"background\":\"transparent\",\"font\":\"Segoe UI\",\"padding\":4,\"axis\":{\"labelColor\":\"#9FC9C1\",\"titleColor\":\"#9FC9C1\",\"gridColor\":\"rgba(255,255,255,0.07)\",\"domainColor\":\"rgba(255,255,255,0.15)\",\"tickColor\":\"rgba(255,255,255,0.15)\",\"labelFontSize\":10,\"titleFontSize\":10,\"titleFontWeight\":\"normal\"},\"legend\":{\"labelColor\":\"#E8F3F1\",\"titleColor\":\"#9FC9C1\",\"orient\":\"top\",\"labelFontSize\":10,\"symbolSize\":80},\"text\":{\"color\":\"#E8F3F1\",\"fontSize\":10},\"locale\":{\"number\":{\"decimal\":\",\",\"thousands\":\".\",\"grouping\":[3],\"currency\":[\"R$ \",\"\"]}}}'"
+                }
+              }
+            },
+            "provider": {
+              "expr": {
+                "Literal": {
+                  "Value": "'vegaLite'"
+                }
+              }
+            },
+            "renderMode": {
+              "expr": {
+                "Literal": {
+                  "Value": "'svg'"
+                }
+              }
+            },
+            "enableTooltips": {
+              "expr": {
+                "Literal": {
+                  "Value": "true"
+                }
+              }
+            },
+            "enableContextMenu": {
+              "expr": {
+                "Literal": {
+                  "Value": "true"
+                }
+              }
+            },
+            "enableSelection": {
+              "expr": {
+                "Literal": {
+                  "Value": "false"
+                }
+              }
+            },
+            "enableHighlight": {
+              "expr": {
+                "Literal": {
+                  "Value": "false"
+                }
+              }
+            }
+          }
+        }
+      ]
+    },
+    "visualContainerObjects": {
+      "background": [
+        {
+          "properties": {
+            "show": {
+              "expr": {
+                "Literal": {
+                  "Value": "false"
+                }
+              }
+            }
+          }
+        }
+      ],
+      "border": [
+        {
+          "properties": {
+            "show": {
+              "expr": {
+                "Literal": {
+                  "Value": "false"
+                }
+              }
+            }
+          }
+        }
+      ],
+      "dropShadow": [
+        {
+          "properties": {
+            "show": {
+              "expr": {
+                "Literal": {
+                  "Value": "false"
+                }
+              }
+            }
+          }
+        }
+      ],
+      "title": [
+        {
+          "properties": {
+            "show": {
+              "expr": {
+                "Literal": {
+                  "Value": "true"
+                }
+              }
+            },
+            "text": {
+              "expr": {
+                "Literal": {
+                  "Value": "'Pareto de receita por subcategoria'"
+                }
+              }
+            },
+            "fontColor": {
+              "solid": {
+                "color": {
+                  "expr": {
+                    "Literal": {
+                      "Value": "'#DDF5EB'"
+                    }
+                  }
+                }
+              }
+            },
+            "fontSize": {
+              "expr": {
+                "Literal": {
+                  "Value": "12D"
+                }
+              }
+            },
+            "fontFamily": {
+              "expr": {
+                "Literal": {
+                  "Value": "'Segoe UI Semibold'"
+                }
+              }
+            }
+          }
+        }
+      ],
+      "subTitle": [
+        {
+          "properties": {
+            "show": {
+              "expr": {
+                "Literal": {
+                  "Value": "true"
+                }
+              }
+            },
+            "text": {
+              "expr": {
+                "Literal": {
+                  "Value": "'Barras turquesa = subcategorias que somam até 80% da receita · linha = % acumulado'"
+                }
+              }
+            },
+            "fontColor": {
+              "solid": {
+                "color": {
+                  "expr": {
+                    "Literal": {
+                      "Value": "'#9FC9C1'"
+                    }
+                  }
+                }
+              }
+            },
+            "fontSize": {
+              "expr": {
+                "Literal": {
+                  "Value": "9D"
+                }
+              }
+            }
+          }
+        }
+      ]
+    }
+  }
+}

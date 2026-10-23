@@ -1,0 +1,81 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/report/3.0.0/schema.json",
+  "themeCollection": {
+    "customTheme": {
+      "name": "FarmaVitta_Tema_Dark.json",
+      "reportVersionAtImport": {
+        "visual": "2.2.0",
+        "report": "3.0.0",
+        "page": "2.0.0"
+      },
+      "type": "RegisteredResources"
+    }
+  },
+  "publicCustomVisuals": [
+    "deneb7E15AEF80B9E4D4F8E12924291ECE89A",
+    "htmlContent443BE3AD55E043BF878BED274D3A6855"
+  ],
+  "resourcePackages": [
+    {
+      "name": "RegisteredResources",
+      "type": "RegisteredResources",
+      "items": [
+        {
+          "name": "FarmaVitta_Tema_Dark.json",
+          "path": "FarmaVitta_Tema_Dark.json",
+          "type": "CustomTheme"
+        },
+        {
+          "name": "v2_home.png",
+          "path": "v2_home.png",
+          "type": "Image"
+        },
+        {
+          "name": "v2_exec.png",
+          "path": "v2_exec.png",
+          "type": "Image"
+        },
+        {
+          "name": "v2_com.png",
+          "path": "v2_com.png",
+          "type": "Image"
+        },
+        {
+          "name": "v2_prod.png",
+          "path": "v2_prod.png",
+          "type": "Image"
+        },
+        {
+          "name": "v2_compras.png",
+          "path": "v2_compras.png",
+          "type": "Image"
+        },
+        {
+          "name": "v2_estoque.png",
+          "path": "v2_estoque.png",
+          "type": "Image"
+        },
+        {
+          "name": "v2_fin.png",
+          "path": "v2_fin.png",
+          "type": "Image"
+        },
+        {
+          "name": "v2_fc.png",
+          "path": "v2_fc.png",
+          "type": "Image"
+        },
+        {
+          "name": "logo_negativo.png",
+          "path": "logo_negativo.png",
+          "type": "Image"
+        }
+      ]
+    }
+  ],
+  "settings": {
+    "useStylableVisualContainerHeader": true,
+    "exportDataMode": "AllowSummarized",
+    "defaultDrillFilterOtherVisuals": true
+  }
+}

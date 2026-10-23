@@ -1,0 +1,121 @@
+{
+  "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+  "data": {
+    "name": "dataset"
+  },
+  "width": "container",
+  "height": "container",
+  "encoding": {
+    "y": {
+      "field": "cat",
+      "type": "nominal",
+      "axis": {
+        "title": null
+      }
+    }
+  },
+  "layer": [
+    {
+      "mark": {
+        "type": "rule",
+        "color": "rgba(255,255,255,0.12)",
+        "strokeWidth": 6
+      },
+      "encoding": {
+        "x": {
+          "aggregate": "min",
+          "field": "cob"
+        },
+        "x2": {
+          "aggregate": "max",
+          "field": "cob"
+        }
+      }
+    },
+    {
+      "mark": {
+        "type": "circle",
+        "size": 120,
+        "opacity": 0.95
+      },
+      "encoding": {
+        "x": {
+          "field": "cob",
+          "type": "quantitative",
+          "axis": {
+            "title": "dias de cobertura"
+          },
+          "scale": {
+            "zero": true
+          }
+        },
+        "color": {
+          "field": "loja",
+          "type": "nominal",
+          "scale": {
+            "range": [
+              "#18B89F",
+              "#DDF5EB",
+              "#F2C46D",
+              "#EF9277"
+            ]
+          },
+          "legend": {
+            "title": null
+          }
+        },
+        "tooltip": [
+          {
+            "field": "cat",
+            "title": "Categoria"
+          },
+          {
+            "field": "loja",
+            "title": "Loja"
+          },
+          {
+            "field": "cob",
+            "title": "Cobertura (dias)",
+            "format": ",.0f"
+          }
+        ]
+      }
+    },
+    {
+      "mark": {
+        "type": "rule",
+        "color": "#EF9277",
+        "strokeDash": [
+          4,
+          3
+        ]
+      },
+      "encoding": {
+        "x": {
+          "datum": 120
+        }
+      }
+    },
+    {
+      "mark": {
+        "type": "text",
+        "color": "#EF9277",
+        "align": "left",
+        "dx": 4,
+        "dy": -6,
+        "fontSize": 10
+      },
+      "encoding": {
+        "x": {
+          "datum": 120
+        },
+        "y": {
+          "value": 0
+        },
+        "text": {
+          "value": "excesso > 120 dias"
+        }
+      }
+    }
+  ]
+}

@@ -1,0 +1,256 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.2.0/schema.json",
+  "name": "82b2485b2eef5d4f8bde",
+  "position": {
+    "x": 254,
+    "y": 276,
+    "z": 1230,
+    "height": 408,
+    "width": 1028,
+    "tabOrder": 1230
+  },
+  "visual": {
+    "visualType": "deneb7E15AEF80B9E4D4F8E12924291ECE89A",
+    "query": {
+      "queryState": {
+        "dataset": {
+          "projections": [
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "dProduto"
+                    }
+                  },
+                  "Property": "Categoria"
+                }
+              },
+              "queryRef": "dProduto.Categoria",
+              "nativeQueryRef": "Categoria",
+              "displayName": "cat"
+            },
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "dLoja"
+                    }
+                  },
+                  "Property": "Loja Curta"
+                }
+              },
+              "queryRef": "dLoja.Loja Curta",
+              "nativeQueryRef": "Loja Curta",
+              "displayName": "loja"
+            },
+            {
+              "field": {
+                "Measure": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "_Medidas"
+                    }
+                  },
+                  "Property": "Cobertura (dias)"
+                }
+              },
+              "queryRef": "_Medidas.Cobertura (dias)",
+              "nativeQueryRef": "Cobertura (dias)",
+              "displayName": "cob"
+            }
+          ]
+        }
+      }
+    },
+    "objects": {
+      "vega": [
+        {
+          "properties": {
+            "jsonSpec": {
+              "expr": {
+                "Literal": {
+                  "Value": "'{\"$schema\":\"https://vega.github.io/schema/vega-lite/v5.json\",\"data\":{\"name\":\"dataset\"},\"width\":\"container\",\"height\":\"container\",\"encoding\":{\"y\":{\"field\":\"cat\",\"type\":\"nominal\",\"axis\":{\"title\":null}}},\"layer\":[{\"mark\":{\"type\":\"rule\",\"color\":\"rgba(255,255,255,0.12)\",\"strokeWidth\":6},\"encoding\":{\"x\":{\"aggregate\":\"min\",\"field\":\"cob\"},\"x2\":{\"aggregate\":\"max\",\"field\":\"cob\"}}},{\"mark\":{\"type\":\"circle\",\"size\":120,\"opacity\":0.95},\"encoding\":{\"x\":{\"field\":\"cob\",\"type\":\"quantitative\",\"axis\":{\"title\":\"dias de cobertura\"},\"scale\":{\"zero\":true}},\"color\":{\"field\":\"loja\",\"type\":\"nominal\",\"scale\":{\"range\":[\"#18B89F\",\"#DDF5EB\",\"#F2C46D\",\"#EF9277\"]},\"legend\":{\"title\":null}},\"tooltip\":[{\"field\":\"cat\",\"title\":\"Categoria\"},{\"field\":\"loja\",\"title\":\"Loja\"},{\"field\":\"cob\",\"title\":\"Cobertura (dias)\",\"format\":\",.0f\"}]}},{\"mark\":{\"type\":\"rule\",\"color\":\"#EF9277\",\"strokeDash\":[4,3]},\"encoding\":{\"x\":{\"datum\":120}}},{\"mark\":{\"type\":\"text\",\"color\":\"#EF9277\",\"align\":\"left\",\"dx\":4,\"dy\":-6,\"fontSize\":10},\"encoding\":{\"x\":{\"datum\":120},\"y\":{\"value\":0},\"text\":{\"value\":\"excesso > 120 dias\"}}}]}'"
+                }
+              }
+            },
+            "jsonConfig": {
+              "expr": {
+                "Literal": {
+                  "Value": "'{\"autosize\":{\"type\":\"fit\",\"contains\":\"padding\"},\"view\":{\"stroke\":\"transparent\"},\"background\":\"transparent\",\"font\":\"Segoe UI\",\"padding\":4,\"axis\":{\"labelColor\":\"#9FC9C1\",\"titleColor\":\"#9FC9C1\",\"gridColor\":\"rgba(255,255,255,0.07)\",\"domainColor\":\"rgba(255,255,255,0.15)\",\"tickColor\":\"rgba(255,255,255,0.15)\",\"labelFontSize\":10,\"titleFontSize\":10,\"titleFontWeight\":\"normal\"},\"legend\":{\"labelColor\":\"#E8F3F1\",\"titleColor\":\"#9FC9C1\",\"orient\":\"top\",\"labelFontSize\":10,\"symbolSize\":80},\"text\":{\"color\":\"#E8F3F1\",\"fontSize\":10},\"locale\":{\"number\":{\"decimal\":\",\",\"thousands\":\".\",\"grouping\":[3],\"currency\":[\"R$ \",\"\"]}}}'"
+                }
+              }
+            },
+            "provider": {
+              "expr": {
+                "Literal": {
+                  "Value": "'vegaLite'"
+                }
+              }
+            },
+            "renderMode": {
+              "expr": {
+                "Literal": {
+                  "Value": "'svg'"
+                }
+              }
+            },
+            "enableTooltips": {
+              "expr": {
+                "Literal": {
+                  "Value": "true"
+                }
+              }
+            },
+            "enableContextMenu": {
+              "expr": {
+                "Literal": {
+                  "Value": "true"
+                }
+              }
+            },
+            "enableSelection": {
+              "expr": {
+                "Literal": {
+                  "Value": "false"
+                }
+              }
+            },
+            "enableHighlight": {
+              "expr": {
+                "Literal": {
+                  "Value": "false"
+                }
+              }
+            }
+          }
+        }
+      ]
+    },
+    "visualContainerObjects": {
+      "background": [
+        {
+          "properties": {
+            "show": {
+              "expr": {
+                "Literal": {
+                  "Value": "false"
+                }
+              }
+            }
+          }
+        }
+      ],
+      "border": [
+        {
+          "properties": {
+            "show": {
+              "expr": {
+                "Literal": {
+                  "Value": "false"
+                }
+              }
+            }
+          }
+        }
+      ],
+      "dropShadow": [
+        {
+          "properties": {
+            "show": {
+              "expr": {
+                "Literal": {
+                  "Value": "false"
+                }
+              }
+            }
+          }
+        }
+      ],
+      "title": [
+        {
+          "properties": {
+            "show": {
+              "expr": {
+                "Literal": {
+                  "Value": "true"
+                }
+              }
+            },
+            "text": {
+              "expr": {
+                "Literal": {
+                  "Value": "'Cobertura estimada por categoria e loja'"
+                }
+              }
+            },
+            "fontColor": {
+              "solid": {
+                "color": {
+                  "expr": {
+                    "Literal": {
+                      "Value": "'#DDF5EB'"
+                    }
+                  }
+                }
+              }
+            },
+            "fontSize": {
+              "expr": {
+                "Literal": {
+                  "Value": "12D"
+                }
+              }
+            },
+            "fontFamily": {
+              "expr": {
+                "Literal": {
+                  "Value": "'Segoe UI Semibold'"
+                }
+              }
+            }
+          }
+        }
+      ],
+      "subTitle": [
+        {
+          "properties": {
+            "show": {
+              "expr": {
+                "Literal": {
+                  "Value": "true"
+                }
+              }
+            },
+            "text": {
+              "expr": {
+                "Literal": {
+                  "Value": "'Saldo final ÷ venda média diária dos últimos 3 meses · tracejado = limite de excesso'"
+                }
+              }
+            },
+            "fontColor": {
+              "solid": {
+                "color": {
+                  "expr": {
+                    "Literal": {
+                      "Value": "'#9FC9C1'"
+                    }
+                  }
+                }
+              }
+            },
+            "fontSize": {
+              "expr": {
+                "Literal": {
+                  "Value": "9D"
+                }
+              }
+            }
+          }
+        }
+      ]
+    }
+  }
+}

@@ -1,0 +1,93 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/bookmark/1.4.0/schema.json",
+  "displayName": "Financeiro & Resultado · filtros fechar",
+  "name": "353ade68c9785bb7a081",
+  "options": {
+    "applyOnlyToTargetVisuals": true,
+    "targetVisualNames": [
+      "4be6485a651a5a80a410",
+      "158edf7056d75cfcbd0e",
+      "9d0de4600b7e58a4a9c5",
+      "d1e91ca5101d505dae54",
+      "69678155449b598e9506",
+      "854cb26589d55cc7bd07",
+      "2fe8f56576bc5771a2c1",
+      "62782ee55550516aa5ba"
+    ],
+    "suppressData": true
+  },
+  "explorationState": {
+    "version": "1.3",
+    "activeSection": "985d144935c25f52b05c",
+    "sections": {
+      "985d144935c25f52b05c": {
+        "visualContainers": {
+          "4be6485a651a5a80a410": {
+            "singleVisual": {
+              "visualType": "shape",
+              "display": {
+                "mode": "hidden"
+              }
+            }
+          },
+          "158edf7056d75cfcbd0e": {
+            "singleVisual": {
+              "visualType": "textbox",
+              "display": {
+                "mode": "hidden"
+              }
+            }
+          },
+          "9d0de4600b7e58a4a9c5": {
+            "singleVisual": {
+              "visualType": "actionButton",
+              "display": {
+                "mode": "hidden"
+              }
+            }
+          },
+          "d1e91ca5101d505dae54": {
+            "singleVisual": {
+              "visualType": "slicer",
+              "display": {
+                "mode": "hidden"
+              }
+            }
+          },
+          "69678155449b598e9506": {
+            "singleVisual": {
+              "visualType": "slicer",
+              "display": {
+                "mode": "hidden"
+              }
+            }
+          },
+          "854cb26589d55cc7bd07": {
+            "singleVisual": {
+              "visualType": "slicer",
+              "display": {
+                "mode": "hidden"
+              }
+            }
+          },
+          "2fe8f56576bc5771a2c1": {
+            "singleVisual": {
+              "visualType": "actionButton",
+              "display": {
+                "mode": "hidden"
+              }
+            }
+          },
+          "62782ee55550516aa5ba": {
+            "singleVisual": {
+              "visualType": "actionButton",
+              "display": {
+                "mode": "hidden"
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,61 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/bookmarksMetadata/1.0.0/schema.json",
+  "items": [
+    {
+      "name": "fc06d0f8968b54e99377",
+      "displayName": "Filtros · Visão Executiva",
+      "children": [
+        "35e28449d5c15acdbc7d",
+        "b3c4c57efdc15269b920"
+      ]
+    },
+    {
+      "name": "5597b8fc6be75650823b",
+      "displayName": "Filtros · Comercial & Clientes",
+      "children": [
+        "06ab99fa673c566a95a5",
+        "bad0d59442db5ecf8132"
+      ]
+    },
+    {
+      "name": "be84c2ddee2e57fd875b",
+      "displayName": "Filtros · Produtos & Rentabilidade",
+      "children": [
+        "31a2cde6a68c56c38fca",
+        "ba54fb0643a95acfb210"
+      ]
+    },
+    {
+      "name": "d5a90d378f6c5148be75",
+      "displayName": "Filtros · Compras & Fornecedores",
+      "children": [
+        "eaa1cfee338b503ebcc4",
+        "3d92ee4c36625911ae8b"
+      ]
+    },
+    {
+      "name": "8dbebcce3c3858c6b455",
+      "displayName": "Filtros · Estoque & Validade",
+      "children": [
+        "c906eca1ba0153c3b975",
+        "abb5ebe3d8f253739eb0"
+      ]
+    },
+    {
+      "name": "99bc239404175f8e9938",
+      "displayName": "Filtros · Financeiro & Resultado",
+      "children": [
+        "1f599cefc2bb564ea50b",
+        "353ade68c9785bb7a081"
+      ]
+    },
+    {
+      "name": "693ec82c0ae559768f6d",
+      "displayName": "Filtros · Forecast & Planejamento",
+      "children": [
+        "05f53e82f38f5b3f9655",
+        "83fcdcb10fce597dbff8"
+      ]
+    }
+  ]
+}

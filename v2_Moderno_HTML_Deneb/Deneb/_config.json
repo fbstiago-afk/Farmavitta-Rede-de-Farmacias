@@ -1,0 +1,46 @@
+{
+  "autosize": {
+    "type": "fit",
+    "contains": "padding"
+  },
+  "view": {
+    "stroke": "transparent"
+  },
+  "background": "transparent",
+  "font": "Segoe UI",
+  "padding": 4,
+  "axis": {
+    "labelColor": "#9FC9C1",
+    "titleColor": "#9FC9C1",
+    "gridColor": "rgba(255,255,255,0.07)",
+    "domainColor": "rgba(255,255,255,0.15)",
+    "tickColor": "rgba(255,255,255,0.15)",
+    "labelFontSize": 10,
+    "titleFontSize": 10,
+    "titleFontWeight": "normal"
+  },
+  "legend": {
+    "labelColor": "#E8F3F1",
+    "titleColor": "#9FC9C1",
+    "orient": "top",
+    "labelFontSize": 10,
+    "symbolSize": 80
+  },
+  "text": {
+    "color": "#E8F3F1",
+    "fontSize": 10
+  },
+  "locale": {
+    "number": {
+      "decimal": ",",
+      "thousands": ".",
+      "grouping": [
+        3
+      ],
+      "currency": [
+        "R$ ",
+        ""
+      ]
+    }
+  }
+}

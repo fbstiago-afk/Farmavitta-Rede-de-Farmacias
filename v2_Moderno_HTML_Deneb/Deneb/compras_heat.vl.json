@@ -1,0 +1,85 @@
+{
+  "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+  "data": {
+    "name": "dataset"
+  },
+  "width": "container",
+  "height": "container",
+  "encoding": {
+    "x": {
+      "field": "cat",
+      "type": "nominal",
+      "axis": {
+        "title": null,
+        "labelAngle": 0,
+        "orient": "top"
+      }
+    },
+    "y": {
+      "field": "loja",
+      "type": "nominal",
+      "axis": {
+        "title": null
+      }
+    }
+  },
+  "layer": [
+    {
+      "mark": {
+        "type": "rect",
+        "cornerRadius": 4,
+        "stroke": "#071E23",
+        "strokeWidth": 3
+      },
+      "encoding": {
+        "color": {
+          "field": "pont",
+          "type": "quantitative",
+          "scale": {
+            "range": [
+              "#EF9277",
+              "#F2C46D",
+              "#18B89F"
+            ]
+          },
+          "legend": null
+        },
+        "tooltip": [
+          {
+            "field": "loja",
+            "title": "Loja"
+          },
+          {
+            "field": "cat",
+            "title": "Categoria"
+          },
+          {
+            "field": "pont",
+            "title": "Pontualidade",
+            "format": ".1%"
+          },
+          {
+            "field": "rec",
+            "title": "Recebimentos",
+            "format": ",.0f"
+          }
+        ]
+      }
+    },
+    {
+      "mark": {
+        "type": "text",
+        "fontSize": 12,
+        "fontWeight": 600,
+        "color": "#071E23"
+      },
+      "encoding": {
+        "text": {
+          "field": "pont",
+          "type": "quantitative",
+          "format": ".0%"
+        }
+      }
+    }
+  ]
+}

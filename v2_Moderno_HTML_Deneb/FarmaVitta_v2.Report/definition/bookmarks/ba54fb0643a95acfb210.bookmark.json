@@ -1,0 +1,120 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/bookmark/1.4.0/schema.json",
+  "displayName": "Produtos & Rentabilidade · filtros fechar",
+  "name": "ba54fb0643a95acfb210",
+  "options": {
+    "applyOnlyToTargetVisuals": true,
+    "targetVisualNames": [
+      "bd9d697c8d305745b4b7",
+      "c7daf9507fe05ce18d6c",
+      "2ab81fb87cb55079a53f",
+      "f03a140750be5abea9ec",
+      "5a21fdceec9f521991eb",
+      "d24302a6a8125b83ab16",
+      "4a38ac0283be50bfa212",
+      "6ffc1db5a38a5595823f",
+      "20637afde65e5a38b9ba",
+      "c17466e004e358d89dc1",
+      "347d558226ca5b8d8f84"
+    ],
+    "suppressData": true
+  },
+  "explorationState": {
+    "version": "1.3",
+    "activeSection": "7c21d80ea59450629a7e",
+    "sections": {
+      "7c21d80ea59450629a7e": {
+        "visualContainers": {
+          "bd9d697c8d305745b4b7": {
+            "singleVisual": {
+              "visualType": "shape",
+              "display": {
+                "mode": "hidden"
+              }
+            }
+          },
+          "c7daf9507fe05ce18d6c": {
+            "singleVisual": {
+              "visualType": "textbox",
+              "display": {
+                "mode": "hidden"
+              }
+            }
+          },
+          "2ab81fb87cb55079a53f": {
+            "singleVisual": {
+              "visualType": "actionButton",
+              "display": {
+                "mode": "hidden"
+              }
+            }
+          },
+          "f03a140750be5abea9ec": {
+            "singleVisual": {
+              "visualType": "slicer",
+              "display": {
+                "mode": "hidden"
+              }
+            }
+          },
+          "5a21fdceec9f521991eb": {
+            "singleVisual": {
+              "visualType": "slicer",
+              "display": {
+                "mode": "hidden"
+              }
+            }
+          },
+          "d24302a6a8125b83ab16": {
+            "singleVisual": {
+              "visualType": "slicer",
+              "display": {
+                "mode": "hidden"
+              }
+            }
+          },
+          "4a38ac0283be50bfa212": {
+            "singleVisual": {
+              "visualType": "slicer",
+              "display": {
+                "mode": "hidden"
+              }
+            }
+          },
+          "6ffc1db5a38a5595823f": {
+            "singleVisual": {
+              "visualType": "slicer",
+              "display": {
+                "mode": "hidden"
+              }
+            }
+          },
+          "20637afde65e5a38b9ba": {
+            "singleVisual": {
+              "visualType": "slicer",
+              "display": {
+                "mode": "hidden"
+              }
+            }
+          },
+          "c17466e004e358d89dc1": {
+            "singleVisual": {
+              "visualType": "actionButton",
+              "display": {
+                "mode": "hidden"
+              }
+            }
+          },
+          "347d558226ca5b8d8f84": {
+            "singleVisual": {
+              "visualType": "actionButton",
+              "display": {
+                "mode": "hidden"
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}

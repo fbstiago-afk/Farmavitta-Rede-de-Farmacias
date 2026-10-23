@@ -1,0 +1,128 @@
+/// Recebimentos de compras (base complementar), conciliados com entradas do estoque. Não representa pedidos emitidos.
+table fRecebimentos
+	lineageTag: dc031a2f-6caa-55a6-939a-5e765410b349
+
+	column id_recebimento
+		dataType: string
+		isHidden
+		lineageTag: 5d2bc9ad-6c00-559d-ad81-92fae3b7cce2
+		summarizeBy: none
+		sourceColumn: id_recebimento
+
+		annotation SummarizationSetBy = Automatic
+
+	column data_recebimento
+		dataType: dateTime
+		formatString: dd/MM/yyyy
+		isHidden
+		lineageTag: 8fa95d24-6460-5cc2-bbcf-15c35f301ee0
+		summarizeBy: none
+		sourceColumn: data_recebimento
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation UnderlyingDateTimeDataType = Date
+
+	column id_loja
+		dataType: string
+		isHidden
+		lineageTag: 13465a42-5c60-5dc5-a26c-7e1b8f54f9b2
+		summarizeBy: none
+		sourceColumn: id_loja
+
+		annotation SummarizationSetBy = Automatic
+
+	column id_produto
+		dataType: string
+		isHidden
+		lineageTag: 3144f46c-325a-528c-bdfc-2d4847eef9c6
+		summarizeBy: none
+		sourceColumn: id_produto
+
+		annotation SummarizationSetBy = Automatic
+
+	column id_fornecedor
+		dataType: string
+		isHidden
+		lineageTag: df52a416-2b41-55c0-9e79-5f055929654d
+		summarizeBy: none
+		sourceColumn: id_fornecedor
+
+		annotation SummarizationSetBy = Automatic
+
+	column quantidade_recebida
+		dataType: int64
+		isHidden
+		lineageTag: 0fd91081-976d-5eaf-a05d-75483c0e32dd
+		summarizeBy: none
+		sourceColumn: quantidade_recebida
+
+		annotation SummarizationSetBy = Automatic
+
+	column custo_unitario
+		dataType: double
+		isHidden
+		lineageTag: f5763efd-a977-582d-b9f1-008eb5238262
+		summarizeBy: none
+		sourceColumn: custo_unitario
+
+		annotation SummarizationSetBy = Automatic
+
+	column valor_recebido
+		dataType: double
+		isHidden
+		lineageTag: e6981d15-b41d-58cc-9b95-813fbf6901c2
+		summarizeBy: none
+		sourceColumn: valor_recebido
+
+		annotation SummarizationSetBy = Automatic
+
+	column prazo_previsto_dias
+		dataType: int64
+		isHidden
+		lineageTag: f3433fc5-dc3e-5a6d-a399-7d5ad55c637d
+		summarizeBy: none
+		sourceColumn: prazo_previsto_dias
+
+		annotation SummarizationSetBy = Automatic
+
+	column prazo_real_dias
+		dataType: int64
+		isHidden
+		lineageTag: 7e04f516-5a2a-5a23-9ac9-8a3ce35dd104
+		summarizeBy: none
+		sourceColumn: prazo_real_dias
+
+		annotation SummarizationSetBy = Automatic
+
+	column entrega_no_prazo
+		dataType: int64
+		isHidden
+		lineageTag: 889811e9-f275-5b72-9346-d31d3324a5cd
+		summarizeBy: none
+		sourceColumn: entrega_no_prazo
+
+		annotation SummarizationSetBy = Automatic
+
+	column atraso_dias
+		dataType: int64
+		isHidden
+		lineageTag: 84bbeb0e-72db-5427-a069-a00761e26c67
+		summarizeBy: none
+		sourceColumn: atraso_dias
+
+		annotation SummarizationSetBy = Automatic
+
+	partition fRecebimentos = m
+		mode: import
+		source =
+				let
+				    Fonte = fnCsv("01_Dados_Originais\base_complementar\f_recebimentos_compras.csv"),
+				    Tipado = Table.TransformColumnTypes(Fonte, {{"id_recebimento", type text}, {"data_recebimento", type date}, {"id_loja", type text}, {"id_produto", type text}, {"id_fornecedor", type text}, {"quantidade_recebida", Int64.Type}, {"custo_unitario", type number}, {"valor_recebido", type number}, {"prazo_previsto_dias", Int64.Type}, {"prazo_real_dias", Int64.Type}, {"entrega_no_prazo", Int64.Type}}, "en-US"),
+				    Atraso = Table.AddColumn(Tipado, "atraso_dias", each List.Max({0, [prazo_real_dias] - [prazo_previsto_dias]}), Int64.Type),
+				    Ultimo = Atraso,
+				    Final = Table.SelectColumns(Ultimo, {"id_recebimento", "data_recebimento", "id_loja", "id_produto", "id_fornecedor", "quantidade_recebida", "custo_unitario", "valor_recebido", "prazo_previsto_dias", "prazo_real_dias", "entrega_no_prazo", "atraso_dias"})
+				in
+				    Final
+
+	annotation PBI_ResultType = Table

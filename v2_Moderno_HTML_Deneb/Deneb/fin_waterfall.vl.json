@@ -1,0 +1,135 @@
+{
+  "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+  "data": {
+    "name": "dataset"
+  },
+  "width": "container",
+  "height": "container",
+  "transform": [
+    {
+      "filter": "datum.val != null"
+    },
+    {
+      "calculate": "datum.ord == 10 ? 0 : datum.val",
+      "as": "amt"
+    },
+    {
+      "window": [
+        {
+          "op": "sum",
+          "field": "amt",
+          "as": "acc"
+        }
+      ],
+      "sort": [
+        {
+          "field": "ord"
+        }
+      ],
+      "frame": [
+        null,
+        0
+      ]
+    },
+    {
+      "calculate": "datum.ord == 10 ? 0 : datum.acc - datum.val",
+      "as": "ini"
+    },
+    {
+      "calculate": "datum.ord == 10 ? datum.val : datum.acc",
+      "as": "fim"
+    },
+    {
+      "calculate": "datum.ord == 3 ? 'Receita' : datum.ord == 10 ? 'Resultado' : 'Dedução'",
+      "as": "tipo"
+    },
+    {
+      "calculate": "format(abs(datum.val) / 1000000, ',.2f') + ' mi'",
+      "as": "rot"
+    }
+  ],
+  "encoding": {
+    "x": {
+      "field": "linha",
+      "type": "nominal",
+      "sort": {
+        "field": "ord"
+      },
+      "axis": {
+        "title": null,
+        "labelAngle": 0,
+        "labelLimit": 120
+      }
+    }
+  },
+  "layer": [
+    {
+      "mark": {
+        "type": "bar",
+        "cornerRadius": 4,
+        "width": {
+          "band": 0.62
+        }
+      },
+      "encoding": {
+        "y": {
+          "field": "ini",
+          "type": "quantitative",
+          "axis": {
+            "title": null,
+            "labelExpr": "format(datum.value / 1000000, ',.1f') + ' mi'"
+          }
+        },
+        "y2": {
+          "field": "fim"
+        },
+        "color": {
+          "field": "tipo",
+          "type": "nominal",
+          "scale": {
+            "domain": [
+              "Receita",
+              "Dedução",
+              "Resultado"
+            ],
+            "range": [
+              "#18B89F",
+              "#EF9277",
+              "#DDF5EB"
+            ]
+          },
+          "legend": null
+        },
+        "tooltip": [
+          {
+            "field": "linha",
+            "title": "Linha"
+          },
+          {
+            "field": "val",
+            "title": "Valor",
+            "format": ",.0f"
+          }
+        ]
+      }
+    },
+    {
+      "mark": {
+        "type": "text",
+        "dy": -8,
+        "fontSize": 11,
+        "fontWeight": 600,
+        "color": "#E8F3F1"
+      },
+      "encoding": {
+        "y": {
+          "field": "fim",
+          "type": "quantitative"
+        },
+        "text": {
+          "field": "rot"
+        }
+      }
+    }
+  ]
+}

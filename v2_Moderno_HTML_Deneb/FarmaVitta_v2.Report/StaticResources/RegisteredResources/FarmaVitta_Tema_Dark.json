@@ -1,0 +1,181 @@
+{
+  "name": "FarmaVitta Dark",
+  "dataColors": [
+    "#18B89F",
+    "#DDF5EB",
+    "#F2C46D",
+    "#EF9277",
+    "#5FA8A0",
+    "#2E8C7E",
+    "#B7C4C7",
+    "#F4C2B3"
+  ],
+  "foreground": "#E8F3F1",
+  "foregroundNeutralSecondary": "#9FC9C1",
+  "foregroundNeutralTertiary": "#5E8580",
+  "background": "#0B2A30",
+  "backgroundLight": "#0E3138",
+  "backgroundNeutral": "#1B4A51",
+  "tableAccent": "#18B89F",
+  "good": "#18B89F",
+  "neutral": "#F2C46D",
+  "bad": "#EF9277",
+  "maximum": "#18B89F",
+  "center": "#F2C46D",
+  "minimum": "#EF9277",
+  "hyperlink": "#18B89F",
+  "textClasses": {
+    "callout": {
+      "fontSize": 24,
+      "fontFace": "Segoe UI Semibold",
+      "color": "#FFFFFF"
+    },
+    "title": {
+      "fontSize": 12,
+      "fontFace": "Segoe UI Semibold",
+      "color": "#DDF5EB"
+    },
+    "header": {
+      "fontSize": 11,
+      "fontFace": "Segoe UI Semibold",
+      "color": "#DDF5EB"
+    },
+    "label": {
+      "fontSize": 10,
+      "fontFace": "Segoe UI",
+      "color": "#E8F3F1"
+    }
+  },
+  "visualStyles": {
+    "*": {
+      "*": {
+        "background": [
+          {
+            "show": false
+          }
+        ],
+        "border": [
+          {
+            "show": false
+          }
+        ],
+        "dropShadow": [
+          {
+            "show": false
+          }
+        ],
+        "title": [
+          {
+            "show": true,
+            "fontColor": {
+              "solid": {
+                "color": "#DDF5EB"
+              }
+            },
+            "fontSize": 12,
+            "fontFamily": "Segoe UI Semibold"
+          }
+        ],
+        "visualHeader": [
+          {
+            "show": true,
+            "background": {
+              "solid": {
+                "color": "#0B2A30"
+              }
+            },
+            "foreground": {
+              "solid": {
+                "color": "#9FC9C1"
+              }
+            },
+            "border": {
+              "solid": {
+                "color": "#0B2A30"
+              }
+            }
+          }
+        ],
+        "visualTooltip": [
+          {
+            "background": {
+              "solid": {
+                "color": "#0B2A30"
+              }
+            },
+            "titleFontColor": {
+              "solid": {
+                "color": "#9FC9C1"
+              }
+            },
+            "valueFontColor": {
+              "solid": {
+                "color": "#E8F3F1"
+              }
+            },
+            "fontSize": 10
+          }
+        ],
+        "padding": [
+          {
+            "top": 8,
+            "bottom": 8,
+            "left": 12,
+            "right": 12
+          }
+        ]
+      }
+    },
+    "page": {
+      "*": {
+        "background": [
+          {
+            "color": {
+              "solid": {
+                "color": "#071E23"
+              }
+            },
+            "transparency": 0
+          }
+        ],
+        "outspace": [
+          {
+            "color": {
+              "solid": {
+                "color": "#04161A"
+              }
+            },
+            "transparency": 0
+          }
+        ]
+      }
+    },
+    "slicer": {
+      "*": {
+        "items": [
+          {
+            "fontColor": {
+              "solid": {
+                "color": "#FFFFFF"
+              }
+            },
+            "background": {
+              "solid": {
+                "color": "#0E3138"
+              }
+            }
+          }
+        ],
+        "header": [
+          {
+            "fontColor": {
+              "solid": {
+                "color": "#9FC9C1"
+              }
+            }
+          }
+        ]
+      }
+    }
+  }
+}

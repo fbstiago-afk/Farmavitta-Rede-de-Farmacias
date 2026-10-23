@@ -1,0 +1,102 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/bookmark/1.4.0/schema.json",
+  "displayName": "Forecast & Planejamento · filtros fechar",
+  "name": "83fcdcb10fce597dbff8",
+  "options": {
+    "applyOnlyToTargetVisuals": true,
+    "targetVisualNames": [
+      "30c21dbc4a6d5231bca1",
+      "9c266e52fa7e5d0fb115",
+      "bae7dccdc13f5b34b791",
+      "030df1b7295c59cb8ea1",
+      "a02ebf79b2c55358b04e",
+      "a744e944a42d5acf81b1",
+      "dbb9ecd3630f5fddacff",
+      "3af8978979ae5cdcb75a",
+      "005bda94f1855fae858b"
+    ],
+    "suppressData": true
+  },
+  "explorationState": {
+    "version": "1.3",
+    "activeSection": "9937f84d8a8c54078ab2",
+    "sections": {
+      "9937f84d8a8c54078ab2": {
+        "visualContainers": {
+          "30c21dbc4a6d5231bca1": {
+            "singleVisual": {
+              "visualType": "shape",
+              "display": {
+                "mode": "hidden"
+              }
+            }
+          },
+          "9c266e52fa7e5d0fb115": {
+            "singleVisual": {
+              "visualType": "textbox",
+              "display": {
+                "mode": "hidden"
+              }
+            }
+          },
+          "bae7dccdc13f5b34b791": {
+            "singleVisual": {
+              "visualType": "actionButton",
+              "display": {
+                "mode": "hidden"
+              }
+            }
+          },
+          "030df1b7295c59cb8ea1": {
+            "singleVisual": {
+              "visualType": "slicer",
+              "display": {
+                "mode": "hidden"
+              }
+            }
+          },
+          "a02ebf79b2c55358b04e": {
+            "singleVisual": {
+              "visualType": "slicer",
+              "display": {
+                "mode": "hidden"
+              }
+            }
+          },
+          "a744e944a42d5acf81b1": {
+            "singleVisual": {
+              "visualType": "slicer",
+              "display": {
+                "mode": "hidden"
+              }
+            }
+          },
+          "dbb9ecd3630f5fddacff": {
+            "singleVisual": {
+              "visualType": "slicer",
+              "display": {
+                "mode": "hidden"
+              }
+            }
+          },
+          "3af8978979ae5cdcb75a": {
+            "singleVisual": {
+              "visualType": "actionButton",
+              "display": {
+                "mode": "hidden"
+              }
+            }
+          },
+          "005bda94f1855fae858b": {
+            "singleVisual": {
+              "visualType": "actionButton",
+              "display": {
+                "mode": "hidden"
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}

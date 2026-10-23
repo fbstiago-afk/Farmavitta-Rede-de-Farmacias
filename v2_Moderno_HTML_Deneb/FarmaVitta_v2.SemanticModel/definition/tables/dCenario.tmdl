@@ -1,0 +1,60 @@
+/// Cenários what-if (desconectada). Fatores aplicados sobre a previsão; não são modelo preditivo.
+table dCenario
+	lineageTag: 7eb84daf-a40f-579b-b2fe-f0c5b4901dbf
+
+	column id_cenario
+		dataType: string
+		isHidden
+		lineageTag: f7952f03-0ad2-5d0b-9250-484d45d58d4c
+		summarizeBy: none
+		sourceColumn: id_cenario
+
+		annotation SummarizationSetBy = Automatic
+
+	column Cenario
+		dataType: string
+		lineageTag: 67c5552c-062a-58b5-8502-2c1dd9ee886c
+		summarizeBy: none
+		sourceColumn: cenario
+		sortByColumn: id_cenario
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Fator Receita'
+		dataType: double
+		formatString: 0.00
+		lineageTag: 436ed457-0a2b-5f50-b034-1a7da5665578
+		summarizeBy: none
+		sourceColumn: fator_receita
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Fator Custo'
+		dataType: double
+		formatString: 0.00
+		lineageTag: 7d4062ab-e420-5510-9d26-875807e91724
+		summarizeBy: none
+		sourceColumn: fator_custo
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Descricao Cenario'
+		dataType: string
+		lineageTag: 09aabf95-290a-5d81-a7df-7611a9ab12ca
+		summarizeBy: none
+		sourceColumn: descricao
+
+		annotation SummarizationSetBy = Automatic
+
+	partition dCenario = m
+		mode: import
+		source =
+				let
+				    Fonte = fnCsv("01_Dados_Originais\base_complementar\d_cenarios_previsao.csv"),
+				    Tipado = Table.TransformColumnTypes(Fonte, {{"id_cenario", type text}, {"cenario", type text}, {"fator_receita", type number}, {"fator_custo", type number}, {"descricao", type text}}, "en-US"),
+				    Ultimo = Tipado,
+				    Final = Table.SelectColumns(Ultimo, {"id_cenario", "cenario", "fator_receita", "fator_custo", "descricao"})
+				in
+				    Final
+
+	annotation PBI_ResultType = Table

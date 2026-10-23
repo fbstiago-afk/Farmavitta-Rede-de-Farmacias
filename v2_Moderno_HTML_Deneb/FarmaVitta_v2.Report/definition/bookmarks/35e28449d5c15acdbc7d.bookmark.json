@@ -1,0 +1,75 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/bookmark/1.4.0/schema.json",
+  "displayName": "Visão Executiva · filtros abrir",
+  "name": "35e28449d5c15acdbc7d",
+  "options": {
+    "applyOnlyToTargetVisuals": true,
+    "targetVisualNames": [
+      "c85b12b8cb63595b8bdb",
+      "2f0795d72b7e590eadcb",
+      "bdbcb8f14eb355769506",
+      "d772ef9780ed5af59500",
+      "f04dda3c39c05820b38d",
+      "96d3a1794ced599bb809",
+      "8d033e7eef39547e9330",
+      "52aa635dc84354e8bf4c",
+      "82de8b15e7e95dd0927c"
+    ],
+    "suppressData": true
+  },
+  "explorationState": {
+    "version": "1.3",
+    "activeSection": "704099e9f24852acbb10",
+    "sections": {
+      "704099e9f24852acbb10": {
+        "visualContainers": {
+          "c85b12b8cb63595b8bdb": {
+            "singleVisual": {
+              "visualType": "shape"
+            }
+          },
+          "2f0795d72b7e590eadcb": {
+            "singleVisual": {
+              "visualType": "textbox"
+            }
+          },
+          "bdbcb8f14eb355769506": {
+            "singleVisual": {
+              "visualType": "actionButton"
+            }
+          },
+          "d772ef9780ed5af59500": {
+            "singleVisual": {
+              "visualType": "slicer"
+            }
+          },
+          "f04dda3c39c05820b38d": {
+            "singleVisual": {
+              "visualType": "slicer"
+            }
+          },
+          "96d3a1794ced599bb809": {
+            "singleVisual": {
+              "visualType": "slicer"
+            }
+          },
+          "8d033e7eef39547e9330": {
+            "singleVisual": {
+              "visualType": "slicer"
+            }
+          },
+          "52aa635dc84354e8bf4c": {
+            "singleVisual": {
+              "visualType": "actionButton"
+            }
+          },
+          "82de8b15e7e95dd0927c": {
+            "singleVisual": {
+              "visualType": "actionButton"
+            }
+          }
+        }
+      }
+    }
+  }
+}

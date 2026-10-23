@@ -1,0 +1,138 @@
+/// SKUs (5.000) com fornecedor único (ponte 1:1 validada no GATE A) e Classe ABC estática do período completo.
+table dProduto
+	lineageTag: cfa86c35-478c-53f0-8269-5dda7861c092
+
+	column id_produto
+		dataType: string
+		isHidden
+		lineageTag: 60208f27-8817-5b8c-a634-27e3c9a89342
+		summarizeBy: none
+		sourceColumn: id_produto
+
+		annotation SummarizationSetBy = Automatic
+
+	column Produto
+		dataType: string
+		lineageTag: 9aaca5bf-90dd-5c05-9d2f-cdfc20038c42
+		summarizeBy: none
+		sourceColumn: nome_produto
+
+		annotation SummarizationSetBy = Automatic
+
+	column Categoria
+		dataType: string
+		lineageTag: 84aae102-3175-5e29-b8d2-d3658cea3dbc
+		summarizeBy: none
+		sourceColumn: categoria
+
+		annotation SummarizationSetBy = Automatic
+
+	column Subcategoria
+		dataType: string
+		lineageTag: 57421267-661c-59df-9c63-23daaf7405a6
+		summarizeBy: none
+		sourceColumn: subcategoria
+
+		annotation SummarizationSetBy = Automatic
+
+	column Marca
+		dataType: string
+		lineageTag: 45f2658d-ae07-53bd-880d-8d6a558919f7
+		summarizeBy: none
+		sourceColumn: marca
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Preco Lista Ref'
+		dataType: double
+		formatString: \R\$ #,0.00
+		lineageTag: 3e4db445-a2b4-527c-b013-45ef72e238c1
+		summarizeBy: none
+		sourceColumn: preco_lista_referencia
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Custo Ref'
+		dataType: double
+		formatString: \R\$ #,0.00
+		lineageTag: 4c966fd1-acd4-5839-9ebd-397ef4ccb6cf
+		summarizeBy: none
+		sourceColumn: custo_unitario_referencia
+
+		annotation SummarizationSetBy = Automatic
+
+	column Generico
+		dataType: string
+		lineageTag: 926612cf-81bd-5c42-b144-acf2f55c04a6
+		summarizeBy: none
+		sourceColumn: eh_generico
+
+		annotation SummarizationSetBy = Automatic
+
+	column Controlado
+		dataType: string
+		lineageTag: 328f9218-2790-5e6f-a9f8-140d004b992d
+		summarizeBy: none
+		sourceColumn: eh_controlado
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Exige Receita'
+		dataType: string
+		lineageTag: b22b2613-6033-5282-a6df-29822c9da59d
+		summarizeBy: none
+		sourceColumn: exige_receita
+
+		annotation SummarizationSetBy = Automatic
+
+	column Status
+		dataType: string
+		lineageTag: ed982d90-bf91-5bc9-8d03-acd48d674827
+		summarizeBy: none
+		sourceColumn: status
+
+		annotation SummarizationSetBy = Automatic
+
+	column id_fornecedor
+		dataType: string
+		isHidden
+		lineageTag: f803dda6-1508-559b-9b94-03b4f4e32817
+		summarizeBy: none
+		sourceColumn: id_fornecedor
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Classe ABC'
+		dataType: string
+		lineageTag: 0dfc9580-e4e6-5a0d-baca-db6fdb9a8d05
+		summarizeBy: none
+		sourceColumn: classe_abc
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Rank Receita'
+		dataType: int64
+		lineageTag: f253710e-edd1-5cfb-a18e-de3c32a670cf
+		summarizeBy: none
+		sourceColumn: rank_receita
+
+		annotation SummarizationSetBy = Automatic
+
+	partition dProduto = m
+		mode: import
+		source =
+				let
+				    Fonte = fnCsv("01_Dados_Originais\base_original\dim_produtos.csv"),
+				    Tipado = Table.TransformColumnTypes(Fonte, {{"preco_lista_referencia", type number}, {"custo_unitario_referencia", type number}}, "en-US"),
+				    SimNao = Table.TransformColumns(Tipado, {{"eh_generico", each if _ = "1" then "Sim" else "Não", type text}, {"eh_controlado", each if _ = "1" then "Sim" else "Não", type text}, {"exige_receita", each if _ = "1" then "Sim" else "Não", type text}}),
+				    Ponte = fnCsv("01_Dados_Originais\base_original\ponte_produto_fornecedor.csv"),
+				    J1 = Table.NestedJoin(SimNao, "id_produto", Ponte, "id_produto", "p", JoinKind.LeftOuter),
+				    E1 = Table.ExpandTableColumn(J1, "p", {"id_fornecedor"}),
+				    Abc = Table.TransformColumnTypes(fnCsv("02_Dados_Tratados\d_produto_abc.csv"), {{"rank_receita", Int64.Type}}, "en-US"),
+				    J2 = Table.NestedJoin(E1, "id_produto", Abc, "id_produto", "a", JoinKind.LeftOuter),
+				    E2 = Table.ExpandTableColumn(J2, "a", {"classe_abc", "rank_receita"}),
+				    Final = Table.SelectColumns(E2, {"id_produto", "nome_produto", "categoria", "subcategoria", "marca", "preco_lista_referencia", "custo_unitario_referencia", "eh_generico", "eh_controlado", "exige_receita", "status", "id_fornecedor", "classe_abc", "rank_receita"})
+				in
+				    Final
+
+	annotation PBI_ResultType = Table

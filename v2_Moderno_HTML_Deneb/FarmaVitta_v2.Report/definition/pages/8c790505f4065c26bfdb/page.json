@@ -1,0 +1,41 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/page/2.0.0/schema.json",
+  "name": "8c790505f4065c26bfdb",
+  "displayName": "TT Receita",
+  "displayOption": "FitToPage",
+  "height": 200,
+  "width": 380,
+  "objects": {
+    "background": [
+      {
+        "properties": {
+          "color": {
+            "solid": {
+              "color": {
+                "expr": {
+                  "Literal": {
+                    "Value": "'#0B2A30'"
+                  }
+                }
+              }
+            }
+          },
+          "transparency": {
+            "expr": {
+              "Literal": {
+                "Value": "0D"
+              }
+            }
+          }
+        }
+      }
+    ]
+  },
+  "type": "Tooltip",
+  "pageBinding": {
+    "name": "6cb74512132251148e50",
+    "type": "Tooltip",
+    "referenceScope": "Default"
+  },
+  "visibility": "HiddenInViewMode"
+}

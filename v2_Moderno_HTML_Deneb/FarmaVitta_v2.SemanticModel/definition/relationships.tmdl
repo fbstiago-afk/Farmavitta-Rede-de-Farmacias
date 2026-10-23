@@ -1,0 +1,108 @@
+relationship fb13fb51-71b0-5355-8a31-0fe8d3cdcc28
+	fromColumn: fVendas.data_venda
+	toColumn: dCalendario.Data
+
+relationship d7e7342e-2549-5ccc-badc-2857e58dda06
+	fromColumn: fItensVenda.data_venda
+	toColumn: dCalendario.Data
+
+relationship 1fa831c3-6268-5e21-9582-5d1ea5d21d17
+	fromColumn: fEstoque.data_mes
+	toColumn: dCalendario.Data
+
+relationship 01b545dc-e756-5fe1-b0e1-9d7053f22539
+	fromColumn: fMetas.data_mes
+	toColumn: dCalendario.Data
+
+relationship 7f09904d-fb76-5a0d-b7d1-e13e9bd7ce6c
+	fromColumn: fDespesas.data_mes
+	toColumn: dCalendario.Data
+
+relationship 56f9561d-061f-5f77-8f0d-0a4658848e0b
+	fromColumn: fRecebimentos.data_recebimento
+	toColumn: dCalendario.Data
+
+relationship ef9356aa-f8f8-5c71-a075-90d5ffb9b010
+	fromColumn: fOrcamentoCompras.data_mes
+	toColumn: dCalendario.Data
+
+relationship 78bb1b66-cfaa-5489-ad61-a48979587740
+	fromColumn: fForecast.data_mes
+	toColumn: dCalendario.Data
+
+relationship 51ad4d56-137d-526a-a417-c03df25224eb
+	fromColumn: fVendas.id_loja
+	toColumn: dLoja.id_loja
+
+relationship 9062ad29-46d1-5631-a869-21640cf92004
+	fromColumn: fItensVenda.id_loja
+	toColumn: dLoja.id_loja
+
+relationship dfab8602-dc63-57d7-8bbb-d4fbf3aa6020
+	fromColumn: fEstoque.id_loja
+	toColumn: dLoja.id_loja
+
+relationship b4f1f0b8-e7ec-5a76-aa7e-a5494b1fc872
+	fromColumn: fMetas.id_loja
+	toColumn: dLoja.id_loja
+
+relationship b926d27e-adfd-5c32-aa42-5a35ff3b592b
+	fromColumn: fDespesas.id_loja
+	toColumn: dLoja.id_loja
+
+relationship ba3b6dc4-60d6-56f8-9020-00cd0b4e0a43
+	fromColumn: fRecebimentos.id_loja
+	toColumn: dLoja.id_loja
+
+relationship 839f2d1c-de46-52e5-91b0-81e57fc82e95
+	fromColumn: fOrcamentoCompras.id_loja
+	toColumn: dLoja.id_loja
+
+relationship d6154801-3fbf-5065-9439-5a336a064f39
+	fromColumn: fLotes.id_loja
+	toColumn: dLoja.id_loja
+
+relationship 8c04b4ef-2c18-5675-904f-d1587a391faa
+	fromColumn: fForecast.id_loja
+	toColumn: dLoja.id_loja
+
+relationship ef85cb90-2777-50e1-b302-967822635bef
+	fromColumn: fBacktest.id_loja
+	toColumn: dLoja.id_loja
+
+relationship e9bd4a2e-59fe-5442-8d09-5531f2060860
+	fromColumn: fItensVenda.id_produto
+	toColumn: dProduto.id_produto
+
+relationship 5441b0df-ae31-5b72-87fe-cc2501ca4b8a
+	fromColumn: fEstoque.id_produto
+	toColumn: dProduto.id_produto
+
+relationship 1baa943f-3863-52c2-85fb-d3e8e9fdca73
+	fromColumn: fRecebimentos.id_produto
+	toColumn: dProduto.id_produto
+
+relationship 71ba26de-f801-5283-b762-7bdea40105e8
+	fromColumn: fLotes.id_produto
+	toColumn: dProduto.id_produto
+
+relationship 611e1996-926c-5c16-a451-c93f571afaff
+	fromColumn: dProduto.id_fornecedor
+	toColumn: dFornecedor.id_fornecedor
+
+relationship 35574228-e113-53fe-b5d9-aae87c5941cf
+	fromColumn: fVendas.id_cliente
+	toColumn: dCliente.id_cliente
+
+relationship 01d0d2ce-99fc-5f30-b157-7ecc28610a05
+	fromColumn: fItensVenda.id_cliente
+	toColumn: dCliente.id_cliente
+
+relationship cb45d4e6-7758-57c2-873f-8364b1f1db21
+	fromColumn: fVendas.canal
+	toColumn: dCanal.Canal
+
+relationship d15a01cc-a078-5b76-a793-fa46ca56241d
+	fromColumn: fItensVenda.canal
+	toColumn: dCanal.Canal
+

@@ -1,0 +1,81 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/bookmark/1.4.0/schema.json",
+  "displayName": "Compras & Fornecedores · filtros abrir",
+  "name": "eaa1cfee338b503ebcc4",
+  "options": {
+    "applyOnlyToTargetVisuals": true,
+    "targetVisualNames": [
+      "a77302d81f02599dbb34",
+      "cf4922c9b230578c9ad9",
+      "ed9c8f6aa2b05dbd9b09",
+      "4ed273f79d9258ad91a7",
+      "45ef46711f9e541287f5",
+      "19f69e63703757c9853f",
+      "c97219782ae35baab427",
+      "ea342b1c32bb5fcaafd4",
+      "24c016b1abb95a1ea7ed",
+      "ba90be5f8e985362be8f"
+    ],
+    "suppressData": true
+  },
+  "explorationState": {
+    "version": "1.3",
+    "activeSection": "6a523cd206e0518aab9d",
+    "sections": {
+      "6a523cd206e0518aab9d": {
+        "visualContainers": {
+          "a77302d81f02599dbb34": {
+            "singleVisual": {
+              "visualType": "shape"
+            }
+          },
+          "cf4922c9b230578c9ad9": {
+            "singleVisual": {
+              "visualType": "textbox"
+            }
+          },
+          "ed9c8f6aa2b05dbd9b09": {
+            "singleVisual": {
+              "visualType": "actionButton"
+            }
+          },
+          "4ed273f79d9258ad91a7": {
+            "singleVisual": {
+              "visualType": "slicer"
+            }
+          },
+          "45ef46711f9e541287f5": {
+            "singleVisual": {
+              "visualType": "slicer"
+            }
+          },
+          "19f69e63703757c9853f": {
+            "singleVisual": {
+              "visualType": "slicer"
+            }
+          },
+          "c97219782ae35baab427": {
+            "singleVisual": {
+              "visualType": "slicer"
+            }
+          },
+          "ea342b1c32bb5fcaafd4": {
+            "singleVisual": {
+              "visualType": "slicer"
+            }
+          },
+          "24c016b1abb95a1ea7ed": {
+            "singleVisual": {
+              "visualType": "actionButton"
+            }
+          },
+          "ba90be5f8e985362be8f": {
+            "singleVisual": {
+              "visualType": "actionButton"
+            }
+          }
+        }
+      }
+    }
+  }
+}
