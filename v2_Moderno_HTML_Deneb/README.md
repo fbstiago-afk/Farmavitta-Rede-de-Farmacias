@@ -4,7 +4,7 @@ Versão construída com o método *Power BI moderno: HTML Content + Deneb + PBIP
 
 **Abrir:** `FarmaVitta_v2.pbip` com internet → ajustar o parâmetro `PastaProjeto` para a raiz do repositório → Atualizar.
 
-> ⚠️ **Status:** gerada e validada fora do Desktop (esquemas JSON, TMDL, DAX das medidas novas no modelo com dados), mas **ainda não aberta no Power BI Desktop**. Ainda não há prints. Ver [VALIDACAO_v2.md](VALIDACAO_v2.md).
+> ✅ **Status (v2.1):** aberta, atualizada e conferida no Power BI Desktop em 23/10/2026. HTML Content e Deneb renderizam; cinco defeitos encontrados na primeira abertura foram corrigidos (ver [VALIDACAO_v2.md](VALIDACAO_v2.md)).
 
 ## O que tem
 
@@ -18,11 +18,19 @@ Versão construída com o método *Power BI moderno: HTML Content + Deneb + PBIP
 | Tabelas | Barras SVG por linha (`dataCategory: ImageUrl`) |
 | Tooltip | Página dedicada em HTML |
 
-## Prévia dos fundos
+## Prints (Power BI Desktop)
 
-| Home | Páginas analíticas |
+| Home | Visão Executiva |
 |---|---|
-| ![](preview/fundo_home.png) | ![](preview/fundo_pagina_analitica.png) |
+| ![](prints/00_Home.jpg) | ![](prints/01_Visao_Executiva.jpg) |
+| **Comercial & Clientes** | **Produtos & Rentabilidade** |
+| ![](prints/02_Comercial_Clientes.jpg) | ![](prints/03_Produtos_Rentabilidade.jpg) |
+| **Compras & Fornecedores** | **Estoque & Validade** |
+| ![](prints/04_Compras_Fornecedores.jpg) | ![](prints/05_Estoque_Validade.jpg) |
+| **Financeiro & Resultado** | **Forecast & Planejamento** |
+| ![](prints/06_Financeiro_Resultado.jpg) | ![](prints/07_Forecast_Planejamento.jpg) |
+
+Prévia dos fundos gerados em [`preview/`](preview).
 
 ## Decisões a homologar
 

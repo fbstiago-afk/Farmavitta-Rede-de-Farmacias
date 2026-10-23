@@ -1119,7 +1119,7 @@ table _Medidas
 	/// Destaca o mês de maior receita na seleção (Deneb).
 	measure 'Cor Destaque Receita Mes' =
 			VAR _mx = CALCULATE ( MAXX ( VALUES ( dCalendario[AnoMes Num] ), [Receita Líquida] ), ALLSELECTED ( dCalendario ) )
-			RETURN IF ( [Receita Líquida] = _mx, "#18B89F", "#2E7F78" )
+			RETURN IF ( NOT ISBLANK ( [Receita Líquida] ), IF ( [Receita Líquida] = _mx, "#18B89F", "#2E7F78" ) )
 		displayFolder: 11 SVG & HTML
 		isHidden
 		lineageTag: ffe7ec4b-4ce2-592a-b77c-582332977fc5
@@ -1132,6 +1132,12 @@ table _Medidas
 		formatString: \R\$ #,0.00;-\R\$ #,0.00;\R\$ #,0.00
 		displayFolder: 07 Financeiro
 		lineageTag: c01dae50-874e-53e7-bd60-289e3fde9098
+
+	/// DRE em R$ mil para tabelas largas.
+	measure 'Valor DRE (R$ mil)' = DIVIDE ( [Valor DRE], 1000 )
+		formatString: #,0;-#,0;0
+		displayFolder: 07 Financeiro
+		lineageTag: 2eb9afdf-30ed-5988-894c-fc7bbb5b64a2
 
 	/// Barra SVG para coluna de tabela (categoria de dados ImageUrl).
 	measure 'SVG Barra Receita Categoria' =

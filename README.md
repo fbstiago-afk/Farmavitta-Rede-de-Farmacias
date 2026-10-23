@@ -17,8 +17,36 @@ As duas versões usam **o mesmo modelo de dados e os mesmos CSVs** (`01_Dados_Or
 | Gráficos | Nativos | 7 **Deneb / Vega-Lite** (waterfall, heatmaps, Pareto, faixa de previsão…) + nativos para filtro cruzado |
 | Filtros | Barra visível + "Limpar filtros" | Painel oculto por **bookmarks** + chips de filtros ativos |
 | Visuais externos | Nenhum | Deneb e HTML Content (AppSource) |
-| Medidas DAX | 183 | 248 |
-| Validação no Desktop | ✅ v1.0 aberta, atualizada e auditada ([prints](v1_Classico/prints)) | ⚠️ Pendente de abertura no Desktop ([detalhes](v2_Moderno_HTML_Deneb/VALIDACAO_v2.md)) |
+| Medidas DAX | 183 | 249 |
+| Validação no Desktop | ✅ aberta, atualizada e auditada ([prints](v1_Classico/prints)) | ✅ aberta e renderizada, v2.1 ([prints](v2_Moderno_HTML_Deneb/prints) · [pendências](v2_Moderno_HTML_Deneb/VALIDACAO_v2.md)) |
+
+## Prints
+
+### v2 · Moderno (HTML Content + Deneb)
+
+| Home | Visão Executiva |
+|---|---|
+| ![](v2_Moderno_HTML_Deneb/prints/00_Home.jpg) | ![](v2_Moderno_HTML_Deneb/prints/01_Visao_Executiva.jpg) |
+| **Comercial & Clientes** | **Produtos & Rentabilidade** |
+| ![](v2_Moderno_HTML_Deneb/prints/02_Comercial_Clientes.jpg) | ![](v2_Moderno_HTML_Deneb/prints/03_Produtos_Rentabilidade.jpg) |
+| **Compras & Fornecedores** | **Estoque & Validade** |
+| ![](v2_Moderno_HTML_Deneb/prints/04_Compras_Fornecedores.jpg) | ![](v2_Moderno_HTML_Deneb/prints/05_Estoque_Validade.jpg) |
+| **Financeiro & Resultado** | **Forecast & Planejamento** |
+| ![](v2_Moderno_HTML_Deneb/prints/06_Financeiro_Resultado.jpg) | ![](v2_Moderno_HTML_Deneb/prints/07_Forecast_Planejamento.jpg) |
+
+### v1 · Clássico
+
+> Capturados na v1.0. Navegação sem texto, "Centro" duplicado e narrativa cortada já foram corrigidos na v1.1.
+
+| Home | Visão Executiva |
+|---|---|
+| ![](v1_Classico/prints/00_Home.jpg) | ![](v1_Classico/prints/01_Visao_Executiva.jpg) |
+| **Comercial & Clientes** | **Produtos & Rentabilidade** |
+| ![](v1_Classico/prints/02_Comercial_Clientes.jpg) | ![](v1_Classico/prints/03_Produtos_Rentabilidade.jpg) |
+| **Compras & Fornecedores** | **Estoque & Validade** |
+| ![](v1_Classico/prints/04_Compras_Fornecedores.jpg) | ![](v1_Classico/prints/05_Estoque_Validade.jpg) |
+| **Financeiro & Resultado** | **Forecast & Planejamento** |
+| ![](v1_Classico/prints/06_Financeiro_Resultado.jpg) | ![](v1_Classico/prints/07_Forecast_Planejamento.jpg) |
 
 ## Como abrir
 

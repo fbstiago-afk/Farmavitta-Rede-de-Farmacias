@@ -53,7 +53,9 @@
       "field": "linha",
       "type": "nominal",
       "sort": {
-        "field": "ord"
+        "field": "ord",
+        "op": "min",
+        "order": "ascending"
       },
       "axis": {
         "title": null,

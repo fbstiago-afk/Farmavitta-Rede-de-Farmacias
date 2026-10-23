@@ -10,12 +10,14 @@
       "field": "mes",
       "type": "ordinal",
       "sort": {
-        "field": "ord"
+        "field": "ord",
+        "op": "min",
+        "order": "ascending"
       },
       "axis": {
         "title": null,
-        "labelAngle": 0,
-        "labelOverlap": true
+        "labelAngle": -45,
+        "labelOverlap": false
       }
     }
   },

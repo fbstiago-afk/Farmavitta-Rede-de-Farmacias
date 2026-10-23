@@ -119,11 +119,13 @@ m("Txt ROS Margem", "10 UI & Formatação", "", '"margem " & FORMAT ( [Margem Op
 # Deneb: destaque inteligente (maior valor da seleção)
 m("Cor Destaque Receita Mes", "11 SVG & HTML", "", f"""
 VAR _mx = CALCULATE ( MAXX ( VALUES ( dCalendario[AnoMes Num] ), [Receita Líquida] ), ALLSELECTED ( dCalendario ) )
-RETURN IF ( [Receita Líquida] = _mx, "{OK}", "#2E7F78" )""", "Destaca o mês de maior receita na seleção (Deneb).")
+RETURN IF ( NOT ISBLANK ( [Receita Líquida] ), IF ( [Receita Líquida] = _mx, "{OK}", "#2E7F78" ) )""", "Destaca o mês de maior receita na seleção (Deneb).")
 m("Valor Ponte Deneb", "07 Financeiro", BRL, """
 SWITCH ( SELECTEDVALUE ( dDRE[Ordem DRE] ),
     3, [Receita Líquida], 4, - [CMV], 6, - [Pessoal], 7, - [Aluguel], 8, - [Despesas Operacionais], 9, - [Marketing e Canais],
     10, [Resultado Operacional Simplificado] )""", "Waterfall Deneb: inclui a linha 10 (total) explicitamente.")
+
+m("Valor DRE (R$ mil)", "07 Financeiro", '#,0;-#,0;0', "DIVIDE ( [Valor DRE], 1000 )", "DRE em R$ mil para tabelas largas.")
 
 # ---------------------------------------------------------------- barras SVG em tabela (ImageUrl)
 def svg_bar(nome, measure, dim, color=OK):

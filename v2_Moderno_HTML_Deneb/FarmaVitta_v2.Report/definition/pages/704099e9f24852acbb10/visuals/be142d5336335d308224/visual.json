@@ -22,7 +22,7 @@
                     "value": "Visão Executiva",
                     "textStyle": {
                       "fontFamily": "Segoe UI Semibold",
-                      "fontSize": "18pt",
+                      "fontSize": "15pt",
                       "color": "#FFFFFF"
                     }
                   }
@@ -35,7 +35,7 @@
                     "value": "Quem cresce com margem e onde está o gap de meta",
                     "textStyle": {
                       "fontFamily": "Segoe UI",
-                      "fontSize": "10pt",
+                      "fontSize": "9pt",
                       "color": "#9FC9C1"
                     }
                   }

@@ -22,7 +22,7 @@
                     "value": "Financeiro & Resultado",
                     "textStyle": {
                       "fontFamily": "Segoe UI Semibold",
-                      "fontSize": "18pt",
+                      "fontSize": "15pt",
                       "color": "#FFFFFF"
                     }
                   }
@@ -35,7 +35,7 @@
                     "value": "DRE gerencial e resultado operacional simplificado",
                     "textStyle": {
                       "fontFamily": "Segoe UI",
-                      "fontSize": "10pt",
+                      "fontSize": "9pt",
                       "color": "#9FC9C1"
                     }
                   }

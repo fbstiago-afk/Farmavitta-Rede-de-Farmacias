@@ -5,15 +5,6 @@
   },
   "width": "container",
   "height": "container",
-  "encoding": {
-    "y": {
-      "field": "cat",
-      "type": "nominal",
-      "axis": {
-        "title": null
-      }
-    }
-  },
   "layer": [
     {
       "mark": {
@@ -22,6 +13,13 @@
         "strokeWidth": 6
       },
       "encoding": {
+        "y": {
+          "field": "cat",
+          "type": "nominal",
+          "axis": {
+            "title": null
+          }
+        },
         "x": {
           "aggregate": "min",
           "field": "cob"
@@ -39,6 +37,10 @@
         "opacity": 0.95
       },
       "encoding": {
+        "y": {
+          "field": "cat",
+          "type": "nominal"
+        },
         "x": {
           "field": "cob",
           "type": "quantitative",
@@ -102,7 +104,7 @@
         "color": "#EF9277",
         "align": "left",
         "dx": 4,
-        "dy": -6,
+        "baseline": "top",
         "fontSize": 10
       },
       "encoding": {
@@ -110,7 +112,7 @@
           "datum": 120
         },
         "y": {
-          "value": 0
+          "value": 2
         },
         "text": {
           "value": "excesso > 120 dias"

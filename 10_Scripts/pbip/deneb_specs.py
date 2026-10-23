@@ -21,7 +21,7 @@ SPECS = {}
 
 SPECS["exec_receita"] = {
     "$schema": VL, "data": {"name": "dataset"}, "width": "container", "height": "container",
-    "encoding": {"x": {"field": "mes", "type": "ordinal", "sort": {"field": "ord"}, "axis": {"title": None, "labelAngle": 0, "labelOverlap": True}}},
+    "encoding": {"x": {"field": "mes", "type": "ordinal", "sort": {"field": "ord", "op": "min", "order": "ascending"}, "axis": {"title": None, "labelAngle": -45, "labelOverlap": False}}},
     "layer": [
         {"mark": {"type": "bar", "cornerRadiusTopLeft": 4, "cornerRadiusTopRight": 4, "width": {"band": 0.68}},
          "encoding": {"y": {"field": "receita", "type": "quantitative", "axis": {"title": None, "labelExpr": MI, "tickCount": 5}},
@@ -37,8 +37,8 @@ SPECS["com_heatmap"] = {
     "$schema": VL, "data": {"name": "dataset"}, "width": "container", "height": "container",
     "mark": {"type": "rect", "cornerRadius": 3, "stroke": "#071E23", "strokeWidth": 2},
     "encoding": {
-        "x": {"field": "mes", "type": "ordinal", "sort": {"field": "ord"}, "axis": {"title": None, "labelAngle": 0, "labelOverlap": True}},
-        "y": {"field": "dia", "type": "ordinal", "sort": {"field": "dord"}, "axis": {"title": None}},
+        "x": {"field": "mes", "type": "ordinal", "sort": {"field": "ord", "op": "min", "order": "ascending"}, "axis": {"title": None, "labelAngle": 0, "labelOverlap": True}},
+        "y": {"field": "dia", "type": "ordinal", "sort": {"field": "dord", "op": "min", "order": "ascending"}, "axis": {"title": None}},
         "color": {"field": "cupons", "type": "quantitative", "scale": {"range": ["#0E3138", "#125F61", "#18B89F", "#DDF5EB"]},
                   "legend": {"title": "Cupons", "orient": "right", "gradientLength": 160}},
         "tooltip": [{"field": "mes", "title": "Mês"}, {"field": "dia", "title": "Dia"}, {"field": "cupons", "title": "Cupons", "format": ",.0f"}]}}
@@ -46,20 +46,22 @@ SPECS["com_heatmap"] = {
 SPECS["prod_pareto"] = {
     "$schema": VL, "data": {"name": "dataset"}, "width": "container", "height": "container",
     "transform": [
-        {"window": [{"op": "sum", "field": "rec", "as": "acc"}], "sort": [{"field": "rec", "order": "descending"}], "frame": [None, 0]},
+        {"window": [{"op": "sum", "field": "rec", "as": "acc"}, {"op": "row_number", "as": "rk"}], "sort": [{"field": "rec", "order": "descending"}], "frame": [None, 0]},
         {"joinaggregate": [{"op": "sum", "field": "rec", "as": "tot"}]},
         {"calculate": "datum.acc / datum.tot", "as": "pct"},
+        {"calculate": "(datum.rk < 10 ? '0' : '') + datum.rk + '. ' + datum.sub", "as": "lbl"},
         {"calculate": "datum.pct - datum.rec / datum.tot < 0.8 ? 'A (até 80%)' : 'B/C'", "as": "classe"}],
-    "encoding": {"x": {"field": "sub", "type": "nominal", "sort": "-y", "axis": {"title": None, "labelAngle": -40, "labelLimit": 90}}},
     "layer": [
         {"mark": {"type": "bar", "cornerRadiusTopLeft": 3, "cornerRadiusTopRight": 3},
-         "encoding": {"y": {"field": "rec", "type": "quantitative", "axis": {"title": None, "labelExpr": MI}},
+         "encoding": {"x": {"field": "lbl", "type": "ordinal", "sort": "ascending", "axis": {"title": None, "labelAngle": -40, "labelLimit": 100}},
+                      "y": {"field": "rec", "type": "quantitative", "axis": {"title": None, "labelExpr": MI}},
                       "color": {"field": "classe", "type": "nominal", "scale": {"domain": ["A (até 80%)", "B/C"], "range": ["#18B89F", "#3D6E72"]}, "legend": {"title": None}},
                       "tooltip": [{"field": "sub", "title": "Subcategoria"}, {"field": "rec", "title": "Receita", "format": ",.0f"}, {"field": "pct", "title": "% acumulado", "format": ".1%"}]}},
-        {"mark": {"type": "line", "color": "#EF9277", "strokeWidth": 2, "point": {"color": "#EF9277", "size": 22}},
-         "encoding": {"x": {"field": "sub", "type": "nominal", "sort": {"field": "rec", "order": "descending"}},
-                      "y": {"field": "pct", "type": "quantitative", "scale": {"domain": [0, 1]}, "axis": {"title": None, "format": ".0%", "orient": "right", "grid": False}}}},
-        {"mark": {"type": "rule", "color": "#F2C46D", "strokeDash": [3, 3]}, "encoding": {"y": {"datum": 0.8, "type": "quantitative", "scale": {"domain": [0, 1]}, "axis": None}}}],
+        {"layer": [
+            {"mark": {"type": "line", "color": "#EF9277", "strokeWidth": 2, "point": {"color": "#EF9277", "size": 22}},
+             "encoding": {"x": {"field": "lbl", "type": "ordinal", "sort": "ascending"},
+                          "y": {"field": "pct", "type": "quantitative", "scale": {"domain": [0, 1]}, "axis": {"title": None, "format": ".0%", "orient": "right", "grid": False}}}},
+            {"mark": {"type": "rule", "color": "#F2C46D", "strokeDash": [3, 3]}, "encoding": {"y": {"datum": 0.8}}}]}],
     "resolve": {"scale": {"y": "independent"}}}
 
 SPECS["compras_heat"] = {
@@ -75,15 +77,15 @@ SPECS["compras_heat"] = {
 
 SPECS["estoque_dot"] = {
     "$schema": VL, "data": {"name": "dataset"}, "width": "container", "height": "container",
-    "encoding": {"y": {"field": "cat", "type": "nominal", "axis": {"title": None}}},
     "layer": [
-        {"mark": {"type": "rule", "color": "rgba(255,255,255,0.12)", "strokeWidth": 6}, "encoding": {"x": {"aggregate": "min", "field": "cob"}, "x2": {"aggregate": "max", "field": "cob"}}},
+        {"mark": {"type": "rule", "color": "rgba(255,255,255,0.12)", "strokeWidth": 6},
+         "encoding": {"y": {"field": "cat", "type": "nominal", "axis": {"title": None}}, "x": {"aggregate": "min", "field": "cob"}, "x2": {"aggregate": "max", "field": "cob"}}},
         {"mark": {"type": "circle", "size": 120, "opacity": 0.95},
-         "encoding": {"x": {"field": "cob", "type": "quantitative", "axis": {"title": "dias de cobertura"}, "scale": {"zero": True}},
+         "encoding": {"y": {"field": "cat", "type": "nominal"}, "x": {"field": "cob", "type": "quantitative", "axis": {"title": "dias de cobertura"}, "scale": {"zero": True}},
                       "color": {"field": "loja", "type": "nominal", "scale": {"range": ["#18B89F", "#DDF5EB", "#F2C46D", "#EF9277"]}, "legend": {"title": None}},
                       "tooltip": [{"field": "cat", "title": "Categoria"}, {"field": "loja", "title": "Loja"}, {"field": "cob", "title": "Cobertura (dias)", "format": ",.0f"}]}},
         {"mark": {"type": "rule", "color": "#EF9277", "strokeDash": [4, 3]}, "encoding": {"x": {"datum": 120}}},
-        {"mark": {"type": "text", "color": "#EF9277", "align": "left", "dx": 4, "dy": -6, "fontSize": 10}, "encoding": {"x": {"datum": 120}, "y": {"value": 0}, "text": {"value": "excesso > 120 dias"}}}]}
+        {"mark": {"type": "text", "color": "#EF9277", "align": "left", "dx": 4, "baseline": "top", "fontSize": 10}, "encoding": {"x": {"datum": 120}, "y": {"value": 2}, "text": {"value": "excesso > 120 dias"}}}]}
 
 SPECS["fin_waterfall"] = {
     "$schema": VL, "data": {"name": "dataset"}, "width": "container", "height": "container",
@@ -95,7 +97,7 @@ SPECS["fin_waterfall"] = {
         {"calculate": "datum.ord == 10 ? datum.val : datum.acc", "as": "fim"},
         {"calculate": "datum.ord == 3 ? 'Receita' : datum.ord == 10 ? 'Resultado' : 'Dedução'", "as": "tipo"},
         {"calculate": "format(abs(datum.val) / 1000000, ',.2f') + ' mi'", "as": "rot"}],
-    "encoding": {"x": {"field": "linha", "type": "nominal", "sort": {"field": "ord"}, "axis": {"title": None, "labelAngle": 0, "labelLimit": 120}}},
+    "encoding": {"x": {"field": "linha", "type": "nominal", "sort": {"field": "ord", "op": "min", "order": "ascending"}, "axis": {"title": None, "labelAngle": 0, "labelLimit": 120}}},
     "layer": [
         {"mark": {"type": "bar", "cornerRadius": 4, "width": {"band": 0.62}},
          "encoding": {"y": {"field": "ini", "type": "quantitative", "axis": {"title": None, "labelExpr": MI}}, "y2": {"field": "fim"},
@@ -106,7 +108,7 @@ SPECS["fin_waterfall"] = {
 
 SPECS["fc_banda"] = {
     "$schema": VL, "data": {"name": "dataset"}, "width": "container", "height": "container",
-    "encoding": {"x": {"field": "mes", "type": "ordinal", "sort": {"field": "ord"}, "axis": {"title": None, "labelAngle": 0, "labelOverlap": True}}},
+    "encoding": {"x": {"field": "mes", "type": "ordinal", "sort": {"field": "ord", "op": "min", "order": "ascending"}, "axis": {"title": None, "labelAngle": 0, "labelOverlap": True}}},
     "layer": [
         {"mark": {"type": "area", "color": "#18B89F", "opacity": 0.18}, "encoding": {"y": {"field": "lo", "type": "quantitative"}, "y2": {"field": "hi"}}},
         {"mark": {"type": "line", "color": "#DDF5EB", "strokeWidth": 2.5, "point": {"filled": True, "size": 24, "color": "#DDF5EB"}},

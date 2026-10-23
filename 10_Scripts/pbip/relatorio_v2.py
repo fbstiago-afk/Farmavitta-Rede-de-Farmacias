@@ -91,7 +91,7 @@ def bar(pg, key, box, cat, ms, title, sub=None, color=None, sort_cat=False, tool
 TBL = lambda: {"columnHeaders": [P(fontColor=COL(K["menta"]), backColor=COL(K["petroleo"]), fontFamily=L(FONTB), fontSize=N(10), alignment=L("Center"), wordWrap=L(True))],
                "values": [P(fontColor=COL(K["texto"]), backColor=COL(K["fundo2"]), backColorSecondary=COL(K["vidro"]), fontSize=N(10), fontFamily=L(FONT))],
                "total": [P(fontColor=COL(K["turquesa"]), backColor=COL(K["petroleo"]), fontFamily=L(FONTB))],
-               "grid": [P(gridHorizontal=L(True), gridHorizontalColor=COL("#1B4A51"), gridVertical=L(False), outlineColor=COL("#1B4A51"), rowPadding=N(4))]}
+               "grid": [P(gridHorizontal=L(True), gridHorizontalColor=COL("#1B4A51"), gridVertical=L(False), outlineColor=COL("#1B4A51"), rowPadding=N(3), imageHeight=N(18), imageWidth=N(120))]}
 
 def table(pg, key, box, fields, title, sort=None, sub=None, center=True):
     x, y, w, h = inner(box, 6)
@@ -100,6 +100,8 @@ def table(pg, key, box, fields, title, sort=None, sub=None, center=True):
         for f in fields:
             if "Measure" in f["field"]:
                 obj["columnFormatting"] = obj.get("columnFormatting", []) + [PS({"metadata": f["queryRef"]}, alignment=L("Center"))]
+    svg = [f for f in fields if "Measure" in f["field"] and f["field"]["Measure"]["Property"].startswith("SVG")]
+    if svg: obj["columnWidth"] = [PS({"metadata": f["queryRef"]}, value=N(132)) for f in svg]
     pg.add(key, "tableEx", x, y, w, h, query={"Values": fields}, objects=obj, vco=dict(NONE, **vtitle(title, sub)), sort=sort)
 
 def matrix(pg, key, box, rows, cols, values, title, sub=None, no_row_total=False):
@@ -162,7 +164,7 @@ def build():
                    fill=K["petroleo2"] if act else None, fill_hover="#1A6E6F", color=K["turquesa"] if act else K["texto"], size=10, align="left",
                    tooltip=SUBT.get(k, "Página inicial"))
         # barra superior
-        tb(pg, "titulo", (TOP[0] + 20, 22, 560, 60), [[(pg.display, 18, K["branco"], True)], [(SUBT[pg.key], 10, K["sub"], False)]], z=49000)
+        tb(pg, "titulo", (TOP[0] + 20, 22, 560, 60), [[(pg.display, 15, K["branco"], True)], [(SUBT[pg.key], 9, K["sub"], False)]], z=49000)
         html(pg, "chips", (820, 26, 860, 52), "HTML Chips Filtros", z=49001)
         button(pg, "btn_filtros", (1724, 30, 164, 44), "⚲  Filtros", bm_link(hid("bm", pg.key, "abrir")), 49002,
                fill=K["turquesa"], fill_hover="#21D1B4", color=K["fundo"], size=11, tooltip="Abrir painel de filtros")
@@ -284,8 +286,8 @@ def build():
     html(pg, "kpis", KPI, "HTML KPIs Financeiro")
     deneb(pg, "d_wf", MAIN, [(CLM("dDRE", "Linha DRE"), "linha"), (CLM("dDRE", "Ordem DRE"), "ord"), (M("Valor Ponte Deneb"), "val")], "fin_waterfall",
           "Da receita líquida ao resultado operacional simplificado", "Resultado = lucro bruto − despesas modeladas · não é EBITDA")
-    matrix(pg, "dre", (R1[0], R1[1], R1[2], R1[3] + R2[3] + 16), [proj(CLM("dDRE", "Linha DRE"))], [proj(CLM(Lj, "Loja Curta"))], ["Valor DRE"],
-           "DRE gerencial simplificada por loja", no_row_total=True)
+    matrix(pg, "dre", (R1[0], R1[1], R1[2], R1[3] + R2[3] + 16), [proj(CLM("dDRE", "Linha DRE"))], [proj(CLM(Lj, "Loja Curta"))], ["Valor DRE (R$ mil)"],
+           "DRE gerencial simplificada por loja (R$ mil)", no_row_total=True)
     html(pg, "narr", inner(B1, 14), "HTML Narrativa Financeiro")
     bar(pg, "desp", B2, CLM(Lj, "Loja Curta"), ["Despesas % Receita"], "Despesas sobre receita por loja", color=K["coral"])
     bar(pg, "mgop", B3, CLM(Lj, "Loja Curta"), ["Margem Operacional Simplificada %"], "Margem op. simplificada por loja", "verde ≥ 20% · âmbar ≥ 10%", cor_measure="Cor Margem Op")

@@ -10,7 +10,9 @@
       "field": "mes",
       "type": "ordinal",
       "sort": {
-        "field": "ord"
+        "field": "ord",
+        "op": "min",
+        "order": "ascending"
       },
       "axis": {
         "title": null,

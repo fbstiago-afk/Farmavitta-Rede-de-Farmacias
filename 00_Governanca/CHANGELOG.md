@@ -12,3 +12,10 @@
 - GATE A: auditoria com 64 testes, todos PASS.
 - Dados tratados: saldo de estoque completo, previsão com backtest, RFV e ABC.
 - Modelo TMDL (19 tabelas, 27 relações, 182 medidas) e relatório PBIR (9 páginas), validados contra os esquemas oficiais.
+
+## v2.1 — 23/10/2026
+- Primeira abertura da v2 no Power BI Desktop: HTML Content e Deneb renderizam.
+- Corrigido: Pareto vazio (ordenação do eixo no Deneb), regra de 120 dias desenhada por categoria, meses de previsão vazios no gráfico de receita.
+- Corrigido: linhas altas e barras SVG minúsculas nas tabelas (`imageHeight`, `imageWidth`, `columnWidth`).
+- DRE por loja em R$ mil; título da barra superior menor.
+- Prints das 8 páginas da v2 publicados.

@@ -27,8 +27,9 @@ Projeto: `v2_Moderno_HTML_Deneb\FarmaVitta_v2.pbip` · Gerado por `10_Scripts/pb
 | 6 | Waterfall Deneb (linhas 3 a 10) | PASS: fecha em R$ 7.747.142,78 = resultado operacional simplificado |
 | 7 | Barra SVG proporcional na tabela de categorias | PASS: Medicamentos 116 px, Baby 57 px |
 | 8 | Destaque inteligente do maior mês | PASS: só mai/26 (R$ 1,85 mi) fica turquesa |
-| 9 | Abrir a v2 no Desktop, baixar Deneb/HTML do AppSource, renderizar cards e specs | **NÃO VALIDADO**: tela do computador indisponível durante a sessão |
-| 10 | Bookmarks do painel de filtros (abrir, aplicar, limpar), Iniciar, menu lateral | **NÃO VALIDADO** (mesmo motivo) |
+| 9 | Abrir a v2 no Desktop (23/10/2026), atualizar e renderizar HTML Content e os 7 Deneb | PASS após correções (v2.1): Pareto vazio (ordenação), regra de 120 dias, meses de previsão vazios no eixo da receita, linhas altas e barras SVG minúsculas nas tabelas (`imageHeight`/`imageWidth`/`columnWidth`), DRE larga (agora em R$ mil). Os specs também foram compilados com Vega-Lite 5.23 antes da publicação |
+| 10 | Bookmarks do painel de filtros (abrir, aplicar, limpar), Iniciar, menu lateral | **NÃO TESTADO por clique**: a interface renderiza (menu, botão Filtros, botão Iniciar), mas a interação ainda não foi exercitada |
+| 10b | Coluna "Cobertura" na tabela de ação do Estoque | **PENDENTE**: fica em branco em linhas de SKU com status "Normal"; o total (414 dias) está correto. Investigar a medida no contexto produto × loja |
 | 11 | Tempo dos cards HTML (alvo < 200 ms) | **NÃO MEDIDO** |
 | 12 | Serviço / PDF / mobile | NÃO VALIDADO. No Serviço e no PDF a animação CSS aparece estática |
 

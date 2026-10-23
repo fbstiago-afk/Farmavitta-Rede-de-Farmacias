@@ -16,7 +16,9 @@
       "field": "mes",
       "type": "ordinal",
       "sort": {
-        "field": "ord"
+        "field": "ord",
+        "op": "min",
+        "order": "ascending"
       },
       "axis": {
         "title": null,
@@ -28,7 +30,9 @@
       "field": "dia",
       "type": "ordinal",
       "sort": {
-        "field": "dord"
+        "field": "dord",
+        "op": "min",
+        "order": "ascending"
       },
       "axis": {
         "title": null

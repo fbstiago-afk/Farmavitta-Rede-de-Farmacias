@@ -12,6 +12,10 @@
           "op": "sum",
           "field": "rec",
           "as": "acc"
+        },
+        {
+          "op": "row_number",
+          "as": "rk"
         }
       ],
       "sort": [
@@ -39,22 +43,14 @@
       "as": "pct"
     },
     {
+      "calculate": "(datum.rk < 10 ? '0' : '') + datum.rk + '. ' + datum.sub",
+      "as": "lbl"
+    },
+    {
       "calculate": "datum.pct - datum.rec / datum.tot < 0.8 ? 'A (até 80%)' : 'B/C'",
       "as": "classe"
     }
   ],
-  "encoding": {
-    "x": {
-      "field": "sub",
-      "type": "nominal",
-      "sort": "-y",
-      "axis": {
-        "title": null,
-        "labelAngle": -40,
-        "labelLimit": 90
-      }
-    }
-  },
   "layer": [
     {
       "mark": {
@@ -63,6 +59,16 @@
         "cornerRadiusTopRight": 3
       },
       "encoding": {
+        "x": {
+          "field": "lbl",
+          "type": "ordinal",
+          "sort": "ascending",
+          "axis": {
+            "title": null,
+            "labelAngle": -40,
+            "labelLimit": 100
+          }
+        },
         "y": {
           "field": "rec",
           "type": "quantitative",
@@ -107,64 +113,57 @@
       }
     },
     {
-      "mark": {
-        "type": "line",
-        "color": "#EF9277",
-        "strokeWidth": 2,
-        "point": {
-          "color": "#EF9277",
-          "size": 22
-        }
-      },
-      "encoding": {
-        "x": {
-          "field": "sub",
-          "type": "nominal",
-          "sort": {
-            "field": "rec",
-            "order": "descending"
+      "layer": [
+        {
+          "mark": {
+            "type": "line",
+            "color": "#EF9277",
+            "strokeWidth": 2,
+            "point": {
+              "color": "#EF9277",
+              "size": 22
+            }
+          },
+          "encoding": {
+            "x": {
+              "field": "lbl",
+              "type": "ordinal",
+              "sort": "ascending"
+            },
+            "y": {
+              "field": "pct",
+              "type": "quantitative",
+              "scale": {
+                "domain": [
+                  0,
+                  1
+                ]
+              },
+              "axis": {
+                "title": null,
+                "format": ".0%",
+                "orient": "right",
+                "grid": false
+              }
+            }
           }
         },
-        "y": {
-          "field": "pct",
-          "type": "quantitative",
-          "scale": {
-            "domain": [
-              0,
-              1
+        {
+          "mark": {
+            "type": "rule",
+            "color": "#F2C46D",
+            "strokeDash": [
+              3,
+              3
             ]
           },
-          "axis": {
-            "title": null,
-            "format": ".0%",
-            "orient": "right",
-            "grid": false
+          "encoding": {
+            "y": {
+              "datum": 0.8
+            }
           }
         }
-      }
-    },
-    {
-      "mark": {
-        "type": "rule",
-        "color": "#F2C46D",
-        "strokeDash": [
-          3,
-          3
-        ]
-      },
-      "encoding": {
-        "y": {
-          "datum": 0.8,
-          "type": "quantitative",
-          "scale": {
-            "domain": [
-              0,
-              1
-            ]
-          },
-          "axis": null
-        }
-      }
+      ]
     }
   ],
   "resolve": {

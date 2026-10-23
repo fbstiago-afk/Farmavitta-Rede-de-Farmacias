@@ -41,11 +41,11 @@
                       "Entity": "_Medidas"
                     }
                   },
-                  "Property": "Valor DRE"
+                  "Property": "Valor DRE (R$ mil)"
                 }
               },
-              "queryRef": "_Medidas.Valor DRE",
-              "nativeQueryRef": "Valor DRE"
+              "queryRef": "_Medidas.Valor DRE (R$ mil)",
+              "nativeQueryRef": "Valor DRE (R$ mil)"
             }
           ]
         },
@@ -256,7 +256,21 @@
             "rowPadding": {
               "expr": {
                 "Literal": {
-                  "Value": "4D"
+                  "Value": "3D"
+                }
+              }
+            },
+            "imageHeight": {
+              "expr": {
+                "Literal": {
+                  "Value": "18D"
+                }
+              }
+            },
+            "imageWidth": {
+              "expr": {
+                "Literal": {
+                  "Value": "120D"
                 }
               }
             }
@@ -394,7 +408,7 @@
             "text": {
               "expr": {
                 "Literal": {
-                  "Value": "'DRE gerencial simplificada por loja'"
+                  "Value": "'DRE gerencial simplificada por loja (R$ mil)'"
                 }
               }
             },
